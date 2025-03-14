@@ -2,6 +2,12 @@ name: CI
 run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push, pull_request]
 jobs:
+  BuildBazel:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: jwlawson/actions-setup-bazel@v2
+        with:
+          bazel-version: '7.5.0'
   BazelBuild:
     runs-on: ubuntu-latest
     steps:
