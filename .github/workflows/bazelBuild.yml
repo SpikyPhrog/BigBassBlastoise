@@ -1,15 +1,9 @@
 name: CI
-
+run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push, pull_request]
-
 jobs:
-  test:
+  check-bats-version:
     runs-on: ubuntu-latest
-
     steps:
-      -uses: actions/checkout@v2
-
-      #build
-      -name: Build the code
-      run: bazel build //...
-      
+      - uses: actions/checkout@v2
+      - run: bazel build //...
