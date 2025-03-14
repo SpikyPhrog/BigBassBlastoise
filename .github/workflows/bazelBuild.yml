@@ -1,0 +1,15 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      -uses: actions/checkout@v2
+
+      #build
+      -name: Build the code
+      run: bazel build //...
+      
