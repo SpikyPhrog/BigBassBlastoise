@@ -5,6 +5,9 @@ jobs:
   BuildBazel:
     runs-on: ubuntu-latest
     steps:
+      - run: sudo apt install gcc
+      - run: sudo apt install build-essential
+      - run: gcc --version
       - uses: jwlawson/actions-setup-bazel@v2
         with:
           bazel-version: '7.5.0'
