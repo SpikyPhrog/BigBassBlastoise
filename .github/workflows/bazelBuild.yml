@@ -12,4 +12,5 @@ jobs:
         with:
           bazel-version: '7.5.0'
       - uses: actions/checkout@v2
-      - run: bazel build //src --cxxopt='-std=c++17'
+      - run: bazel build //src --cxxopt='-std=c++17' --sandbox_add_mount_pair=/tmp
+      
