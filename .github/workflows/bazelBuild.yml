@@ -3,7 +3,6 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on:
   push:
     tags: ["0.0.0.1"]
-  workflow_dispatch:
   
 jobs:
   BuildBazel:
