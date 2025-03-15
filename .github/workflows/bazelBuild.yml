@@ -16,17 +16,13 @@ jobs:
           bazel-version: '7.5.0'
       - uses: actions/checkout@v4
       - run: bazel build //src --cxxopt='-std=c++17'
-      - name: Build Assets
-        run: |
-          cargo build --release --target ${{ matrix.target }}
-          tar -C target/${{ matrix.target }}/release/ -czvf gengo-${{ matrix.target }}.tar.gz gengo${{ runner.os == 'Windows' && '.exe' || '' }}
       - name: Upload Release Assets
         if: ${{ github.event_name != 'workflow_dispatch' }}
         uses: softprops/action-gh-release@v1
         with:
-          files: '*.tar.gz'
+          files: '*.exe'
       - name: Upload Artifacts
         if: ${{ github.event_name == 'workflow_dispatch' }}
         uses: actions/upload-artifact@v3
         with:
-          path: '*.tar.gz'
+          path: '*.exe'
