@@ -15,9 +15,9 @@ jobs:
       - run: bazel build //src --cxxopt='-std=c++17'
       - name: Create Release
         uses: elgohr/Github-Release-Action@v5
-      env:
-        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        title: MyReleaseMessage
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          title: MyReleaseMessage
 
       
