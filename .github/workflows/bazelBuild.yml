@@ -8,7 +8,8 @@ on:
   
 jobs:
   BuildBazel:
-    permissions: write-all
+    permissions:
+      contents: write
     runs-on: windows-latest
     steps:
       - uses: jwlawson/actions-setup-bazel@v2
