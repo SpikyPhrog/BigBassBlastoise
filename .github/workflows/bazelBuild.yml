@@ -21,8 +21,3 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           files: '*.exe'
-      - name: Upload Artifacts
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: actions/upload-artifact@v3
-        with:
-          path: '*.exe'
