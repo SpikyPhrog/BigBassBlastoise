@@ -40,7 +40,6 @@ void VerticalBox::SetPosition(const sf::Vector2f &newPosition)
         {
             lastElementPos.x = vbShape->getPosition().x - child->GetSize().x / 2;
             lastElementPos.y = vbShape->getPosition().y + element_size + elementPadding;
-            // need to set the new children position to be relative to the shape position
             child->SetPosition(lastElementPos);
             element_size = child->GetSize().y;
         }
