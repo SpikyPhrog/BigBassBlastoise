@@ -2,7 +2,7 @@ name: CI
 run-name: ${{ github.actor }} is building
 on:
   push:
-    tags: ["0.0.0.1"]
+    tags: ["*.*.*.*"]
   workflow_dispatch:
   
 jobs:
