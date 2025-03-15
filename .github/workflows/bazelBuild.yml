@@ -17,7 +17,6 @@ jobs:
       - uses: actions/checkout@v4
       - run: bazel build //src --cxxopt='-std=c++17'
       - name: Upload Release Assets
-        if: ${{ github.event_name != 'workflow_dispatch' }}
         uses: softprops/action-gh-release@v1
         with:
           files: '*.exe'
