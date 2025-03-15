@@ -1,0 +1,16 @@
+name: CI
+run-name: ${{ github.actor }} is learning GitHub Actions
+on: [push, pull_request]
+jobs:
+  BuildBazel:
+    runs-on: ubuntu-latest
+    steps:
+      - run: sudo apt install gcc
+      - run: sudo apt install build-essential
+      - run: gcc --version
+      - uses: jwlawson/actions-setup-bazel@v2
+        with:
+          bazel-version: '7.5.0'
+      - uses: actions/checkout@v2
+      - run: bazel build //src --cxxopt='-std=c++17' --sandbox_add_mount_pair=/tmp
+      
