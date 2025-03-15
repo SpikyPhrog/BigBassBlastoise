@@ -12,5 +12,19 @@ jobs:
         with:
           bazel-version: '7.5.0'
       - uses: actions/checkout@v2
-      - run: bazel build //src --cxxopt='-std=c++17' --sandbox_add_mount_pair=/tmp
+      - run: bazel build //src --cxxopt='-std=c++17'
+      - name: Create Release
+        id: create_release
+        uses: actions/create-release@v1
+        env: 
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with: 
+          tag_name: ${{ github.ref }}
+          release_name: Release ${{ github.ref }}
+          body: |
+            Changes in this Release
+            - First Change
+            - Second Change
+          draft: false
+          prerelease: false
       
