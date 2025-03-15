@@ -15,8 +15,6 @@ BaseWidget(window)
     text->setFillColor(sf::Color::Blue);
 
     textSizeWidget = label.length() * 11;
-
-    sf::Vector2f test = text->findCharacterPos(label.length() - 1);
     text->setOrigin(sf::Vector2f(0.f, 0.f));
 }
 

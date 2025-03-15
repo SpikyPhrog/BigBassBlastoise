@@ -1,5 +1,6 @@
 #pragma once
 #include "SFML/Graphics.hpp"
+#include "stdafx.h"
 
 class Character : public sf::Drawable
 {
@@ -10,9 +11,10 @@ public:
     virtual void update(const sf::Time& deltaTime);
 
     void SetPosition(const sf::Vector2f& newPos);
-    const sf::Vector2f& GetPosition() const {return characterShape.getPosition();}
+    const sf::Vector2f& GetPosition() const;
+    
 protected:
-    sf::RectangleShape characterShape;
+    std::unique_ptr<sf::RectangleShape> characterShape;
 
     sf::Vector2f characterPos;
     sf::Font characterFont;

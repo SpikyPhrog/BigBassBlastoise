@@ -4,7 +4,7 @@
 Enemy::Enemy(const sf::Vector2f & characterSize, const sf::Vector2f & characterStartingPos, const sf::Font& font):
 Character(characterSize, characterStartingPos, font)
 {
-    characterShape.setFillColor(sf::Color::Blue);
+    characterShape->setFillColor(sf::Color::Blue);
     
     for (size_t i = 0; i < 10; i++)
     {
@@ -31,7 +31,7 @@ void Enemy::draw(sf::RenderTarget & target, sf::RenderStates states) const
 void Enemy::update(const sf::Time& deltaTime)
 {
     characterPos.x -= enemyMovementSpeed * 4 * deltaTime.asSeconds();
-    characterShape.setPosition(characterPos);
+    characterShape->setPosition(characterPos);
 
     lastWordCharPosition = characterPos.x;
     for (size_t i = 0; i < wordSize; i++)
@@ -104,7 +104,7 @@ void Enemy::SetIsFocused(bool isFocused)
 void Enemy::Knockback()
 {
     characterPos.x += 10;
-    characterShape.setPosition(characterPos);
+    characterShape->setPosition(characterPos);
 }
 
 bool Enemy::CheckIfColliding(std::shared_ptr<sf::RectangleShape> rect)
@@ -115,7 +115,7 @@ bool Enemy::CheckIfColliding(std::shared_ptr<sf::RectangleShape> rect)
         return false;
     }
 
-    if (characterShape.getPosition().x <= rect->getPosition().x + rect->getSize().x)
+    if (characterShape->getPosition().x <= rect->getPosition().x + rect->getSize().x)
     {
         std::cout << "Colliding with something\n";
         return true;

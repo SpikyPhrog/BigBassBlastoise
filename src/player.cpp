@@ -4,7 +4,7 @@
 Player::Player(const sf::Vector2f& characterSize, const sf::Vector2f& characterStartingPos, const sf::Font& font):
 Character(characterSize, characterStartingPos, font)
 {
-    characterShape.setFillColor(sf::Color::Green);
+    characterShape->setFillColor(sf::Color::Green);
 
     std::string scoreString = "Score: " + std::to_string(score);
     std::string livesString = "Lives: " + std::to_string(lives);
