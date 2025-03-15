@@ -3,6 +3,7 @@ run-name: ${{ github.actor }} is learning GitHub Actions
 on: [push, pull_request]
 jobs:
   BuildBazel:
+    permissions: write-all
     runs-on: windows-latest
     steps:
       #- run: sudo apt install gcc
