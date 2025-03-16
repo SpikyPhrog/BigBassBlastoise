@@ -1,10 +1,6 @@
 name: CI
 run-name: ${{ github.actor }} is building
-on:
-  push:
-    tags:
-      - "*"
-  workflow_dispatch:
+on: push
   
 jobs:
   BuildBazel:
