@@ -17,8 +17,8 @@ public:
     void AddWidget(std::shared_ptr<BaseWidget> widgetToAdd);
     
 private:    
-    std::vector<std::shared_ptr<BaseWidget>> children {}; 
-    std::unique_ptr<sf::RectangleShape> vbShape {nullptr};
-    sf::Vector2f lastChildPosition;
-    VBData vbSettings;
+    std::vector<std::shared_ptr<BaseWidget>> children           {}; 
+    std::unique_ptr<sf::RectangleShape> vbShape                 {nullptr};
+    sf::Vector2f lastChildPosition                              {0.f, 0.f};
+    VBData vbSettings                                           {};
 };

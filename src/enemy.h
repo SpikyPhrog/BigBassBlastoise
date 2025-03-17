@@ -30,15 +30,14 @@ protected:
     void Kill();
     
 private:
-    std::unique_ptr<sf::Text> wordTextArray[10] {};
-    
-    float enemyMovementSpeed {10.f};
-    float lastWordCharPosition{0.f};
-    size_t wordSize{0};
-    int textSize{20};
-    int currentIndex {0};
-    bool bIsCompleted {false};
-    bool bIsFocused {false};
-    char* currentLetter {nullptr};
-    char word[10]{};
+    std::unique_ptr<sf::Text> wordTextArray[10]                 {};
+    float enemyMovementSpeed                                    {10.f};
+    float lastWordCharPosition                                  {0.f};
+    size_t wordSize                                             {0};
+    int textSize                                                {20};
+    int currentIndex                                            {0};
+    bool bIsCompleted                                           {false};
+    bool bIsFocused                                             {false};
+    char* currentLetter                                         {nullptr};
+    char word[10]                                               {};
 };

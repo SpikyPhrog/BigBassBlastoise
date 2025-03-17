@@ -20,7 +20,7 @@ public:
     
 private:
     HBData settings; 
-    std::shared_ptr<Slider> slider {nullptr};
-    std::shared_ptr<TextWidget> label {nullptr};
-    std::unique_ptr<HorizontalBox> optionsHB {nullptr};
+    std::shared_ptr<Slider> slider                              {nullptr};
+    std::shared_ptr<TextWidget> label                           {nullptr};
+    std::unique_ptr<HorizontalBox> optionsHB                    {nullptr};
 };

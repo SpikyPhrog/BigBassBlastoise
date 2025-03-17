@@ -30,8 +30,8 @@ public:
     static const GameStates& GetPreviousGameState();
     static void SetGameState(const GameStates& newState);
 private:
-    std::unique_ptr<EnemySpawner> enemySpawner { nullptr };
-    std::shared_ptr<Player> playerChar { nullptr };
+    std::unique_ptr<EnemySpawner> enemySpawner                  { nullptr };
+    std::shared_ptr<Player> playerChar                          { nullptr };
 
     static GameStates gameState;
     static GameStates previousGameState;

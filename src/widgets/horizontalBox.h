@@ -16,8 +16,8 @@ public:
     void AddWidget(std::shared_ptr<BaseWidget> widgetToAdd);
 
 private:
-    std::vector<std::shared_ptr<BaseWidget>> children {}; 
-    std::unique_ptr<sf::RectangleShape> hbShape {nullptr};
-    sf::Vector2f lastChildPosition {0.f, 0.f};
-    HBData hbSettings;
+    std::vector<std::shared_ptr<BaseWidget>> children           {}; 
+    std::unique_ptr<sf::RectangleShape> hbShape                 {nullptr};
+    sf::Vector2f lastChildPosition                              {0.f, 0.f};
+    HBData hbSettings                                           {};
 };

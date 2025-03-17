@@ -4,7 +4,7 @@ load("@rules_pkg//:mappings.bzl", "pkg_files")
 # Add any new asset folder in the glob function !!!
 filegroup(
     name = "assets",
-    srcs = glob(["fonts/*", "music/*"]),
+    srcs = glob(["fonts/*", "music/*", "dict/*"]),
 )
 
 

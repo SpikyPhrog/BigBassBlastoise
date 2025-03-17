@@ -1,25 +1,26 @@
 #include "enemySpawner.h"
 #include <random>
 
-EnemySpawner::EnemySpawner(const sf::Font& font, std::shared_ptr<Player> inPlayer)
+EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<Player> inPlayer)
 {
     std::random_device dev;
     std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1,6);
-    int counter = 97;
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, assetManager.GetDictionarySize());
 
     player = inPlayer;
 
-    std::string::iterator it;
+    std::unordered_set<std::string>::iterator it = assetManager.dictionary.begin();
+
     for (int i = 0; i < 5; i++)
     {
         float x = 700 + (i * 10);
-        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(50.f, 50.f), sf::Vector2f(x, i * 50), font);
-        std::string testChar = "anana";
-        char enemyChar = counter;
-        counter ++;
-        it = testChar.insert(testChar.begin(), enemyChar);
-        enemy->SetWord(testChar.c_str());
+        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(50.f, 50.f), sf::Vector2f(x, i * 50), *assetManager.gameFont);
+        int randomId = dist(rng);
+
+        std::advance(it, randomId);
+
+        std::string randomWord = *it;
+        enemy->SetWord(randomWord.c_str());
         enemyList.emplace_back(enemy);
     }
 

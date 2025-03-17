@@ -14,11 +14,11 @@ public:
     virtual void update() = 0;
 
     void SetIsActive(bool newState);
-    bool GetIsActive() const { return bIsActive;} 
+    bool GetIsActive() const                                    {return bIsActive;} 
 
 protected:
-    std::shared_ptr<sf::RenderWindow> gameWindow;
+    std::shared_ptr<sf::RenderWindow> gameWindow                {nullptr};
 
 private:
-    bool bIsActive { false };
+    bool bIsActive                                              {false};
 };

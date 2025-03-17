@@ -14,8 +14,7 @@ public:
     const sf::Vector2f& GetPosition() const;
     
 protected:
-    std::unique_ptr<sf::RectangleShape> characterShape;
-
-    sf::Vector2f characterPos;
+    std::unique_ptr<sf::RectangleShape> characterShape          {nullptr};
+    sf::Vector2f characterPos                                   {0.f, 0.f};
     sf::Font characterFont;
 };

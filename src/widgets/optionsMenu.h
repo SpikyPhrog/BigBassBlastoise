@@ -22,8 +22,8 @@ private:
     void OnClickedBack();
 
 private:
-    std::unique_ptr<VerticalBox> buttonVB { nullptr };
-    std::shared_ptr<Button> backButton {nullptr};
-    std::shared_ptr<SettingSliderOptionWidget> musicSliderOption {nullptr};
+    std::unique_ptr<VerticalBox> buttonVB                       {nullptr};
+    std::shared_ptr<Button> backButton                          {nullptr};
+    std::shared_ptr<SettingSliderOptionWidget> musicSliderOption{nullptr};
     std::shared_ptr<SettingSliderOptionWidget> testSliderOption {nullptr};
 };

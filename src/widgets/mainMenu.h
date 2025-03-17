@@ -21,8 +21,8 @@ private:
     void OnQuitClicked();
 
 private:
-    std::shared_ptr<Button> playButton;
-    std::shared_ptr<Button> optionsButton;
-    std::shared_ptr<Button> quitButton;
-    std::shared_ptr<VerticalBox> buttonVB;
+    std::shared_ptr<Button> playButton                          {nullptr};
+    std::shared_ptr<Button> optionsButton                       {nullptr};
+    std::shared_ptr<Button> quitButton                          {nullptr};
+    std::shared_ptr<VerticalBox> buttonVB                       {nullptr};
 };

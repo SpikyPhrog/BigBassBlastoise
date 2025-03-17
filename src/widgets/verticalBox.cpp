@@ -17,12 +17,15 @@ BaseWidget(window)
 
 void VerticalBox::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
+    assert(vbShape != nullptr);
+
     target.draw(*vbShape);
 
     if (children.size() > 0)
     {
         for (size_t i = 0; i < children.size(); i++)
         {
+            assert(children[i] != nullptr);
             target.draw(*children[i]);
         }
     }
@@ -30,7 +33,9 @@ void VerticalBox::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void VerticalBox::SetPosition(const sf::Vector2f &newPosition)
 {
+    assert(vbShape != nullptr);
     vbShape->setPosition(newPosition);
+    
     if (children.size() > 0)
     {
         sf::Vector2f lastElementPos {0.f, 0.f};
@@ -38,6 +43,7 @@ void VerticalBox::SetPosition(const sf::Vector2f &newPosition)
 
         for (auto child : children)
         {
+            assert(child != nullptr);
             lastElementPos.x = vbShape->getPosition().x - child->GetSize().x / 2;
             lastElementPos.y = vbShape->getPosition().y + element_size + elementPadding;
             child->SetPosition(lastElementPos);

@@ -14,7 +14,7 @@ public:
     void update();
 
 private:
-    std::shared_ptr<MainMenu> mainMenu {nullptr};
-    std::shared_ptr<PauseMenu> pauseMenu {nullptr};
-    std::shared_ptr<OptionsMenu> optionsMenu {nullptr};
+    std::shared_ptr<MainMenu> mainMenu                          {nullptr};
+    std::shared_ptr<PauseMenu> pauseMenu                        {nullptr};
+    std::shared_ptr<OptionsMenu> optionsMenu                    {nullptr};
 };

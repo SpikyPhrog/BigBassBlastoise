@@ -22,11 +22,11 @@ private:
     std::shared_ptr<sf::RectangleShape> sliderLine;
     std::shared_ptr<sf::CircleShape> sliderKnob;
 
-    bool bIsClicked {false};
-    float value {0.f};
-    sf::Vector2f startPoint {0.f, 0.f};
-    sf::Vector2f endPoint {0.f, 0.f};
-    sf::Color HoveredColor {sf::Color::Green};
-    sf::Color NormalColor {sf::Color::Red};
-    sf::Color ClickedColor {sf::Color::Cyan};
+    bool bIsClicked                                             {false};
+    float value                                                 {0.f};
+    sf::Vector2f startPoint                                     {0.f, 0.f};
+    sf::Vector2f endPoint                                       {0.f, 0.f};
+    sf::Color HoveredColor                                      {sf::Color::Green};
+    sf::Color NormalColor                                       {sf::Color::Red};
+    sf::Color ClickedColor                                      {sf::Color::Cyan};
 };

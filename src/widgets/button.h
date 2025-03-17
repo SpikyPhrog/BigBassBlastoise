@@ -15,7 +15,7 @@ public:
     void SetLabel(const std::string& label);
     void SetSize(const sf::Vector2f& newSize);
 
-    const sf::Vector2f& GetSize() const {return buttonSize; }
+    const sf::Vector2f& GetSize() const                         {return buttonSize; }
     
     std::function<void()> OnClick;
 
@@ -24,10 +24,10 @@ protected:
 private:
     sf::Font font;
     sf::RectangleShape buttonShape;
-    sf::Vector2f buttonSize;
-    std::unique_ptr<sf::Text> buttonText;
-    sf::Color HoveredColor {sf::Color::Red};
-    sf::Color NormalColor {sf::Color::Blue};
-    sf::Color ClickedColor {sf::Color(10, 195, 230)};
-    bool bTriggeredOnce {false};
+    sf::Vector2f buttonSize                                     {0.f, 0.f};
+    std::unique_ptr<sf::Text> buttonText                        {nullptr};
+    sf::Color HoveredColor                                      {sf::Color::Red};
+    sf::Color NormalColor                                       {sf::Color::Blue};
+    sf::Color ClickedColor                                      {sf::Color(10, 195, 230)};
+    bool bTriggeredOnce                                         {false};
 };

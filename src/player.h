@@ -15,12 +15,11 @@ public:
     void DecreaseLives();
 
 private:
-    int lives {3};
-    int score {0};
-    int multiplier {1};
-
-    std::unique_ptr<sf::Text> scoreText;
-    std::unique_ptr<sf::Text> livesText;
+    int lives                                                   {3};
+    int score                                                   {0};
+    int multiplier                                              {1};
+    std::unique_ptr<sf::Text> scoreText                         {nullptr};
+    std::unique_ptr<sf::Text> livesText                         {nullptr};
     
     
 };
