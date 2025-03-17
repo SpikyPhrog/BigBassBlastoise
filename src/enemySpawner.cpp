@@ -20,7 +20,7 @@ EnemySpawner::EnemySpawner(const sf::Font& font, std::shared_ptr<Player> inPlaye
         counter ++;
         it = testChar.insert(testChar.begin(), enemyChar);
         enemy->SetWord(testChar.c_str());
-        enemyList.push_back(enemy);
+        enemyList.emplace_back(enemy);
     }
 
     // switch the size to be screen height
