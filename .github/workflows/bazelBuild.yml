@@ -9,6 +9,8 @@ name: Upload Release Asset
 jobs:
   build:
     name: Upload Release Asset
+    permissions:
+        contents: write
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
