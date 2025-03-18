@@ -1,4 +1,4 @@
-#pragma once
+    #pragma once
 #include "stdafx.h"
 #include "enemy.h" // Has SFML/Graphics.hpp -> Drawable.hpp#
 #include "player.h"
@@ -23,11 +23,11 @@ private:
 private:
     std::vector<std::shared_ptr<Enemy>> enemyList               {};
     std::shared_ptr<Enemy> currentEnemy                         {nullptr};
-int currentEnemyIndex                                           {0};
+    std::shared_ptr<sf::RectangleShape> HitLine                 {nullptr};
+    std::shared_ptr<Player> player                              {nullptr};
+    int currentEnemyIndex                                       {0};
     sf::Vector2f currentEnemyPos                                {0.f, 0.f};
     // To calculate the elapsed time from the start of the word to the end of it
     float timeForWord                                           {0.f};
     sf::Clock clock;
-    std::shared_ptr<sf::RectangleShape> HitLine                 {nullptr};
-    std::shared_ptr<Player> player                              {nullptr};
 };

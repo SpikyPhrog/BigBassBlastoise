@@ -14,7 +14,7 @@ BaseWidget(window)
     text->setString(label);
     text->setFillColor(sf::Color::Blue);
 
-    textSizeWidget = label.length() * 11;
+    textWidgetSize = label.length() * 11;
     text->setOrigin(sf::Vector2f(0.f, 0.f));
 }
 
@@ -23,7 +23,7 @@ void TextWidget::SetText(const std::string & inText)
     if (text)
     {
         text->setString(inText);
-        textSizeWidget = inText.length() * 11;
+        textWidgetSize = inText.length() * 11;
     }
 }
 
@@ -59,7 +59,7 @@ const sf::Vector2f& TextWidget::GetSize()
 {
     if (text)
     {
-        return sf::Vector2f(textSizeWidget , text->getCharacterSize());
+        return sf::Vector2f(textWidgetSize , text->getCharacterSize());
     }
     return sf::Vector2f(0.f, 0.f);
 }

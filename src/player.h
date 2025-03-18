@@ -20,6 +20,4 @@ private:
     int multiplier                                              {1};
     std::unique_ptr<sf::Text> scoreText                         {nullptr};
     std::unique_ptr<sf::Text> livesText                         {nullptr};
-    
-    
 };

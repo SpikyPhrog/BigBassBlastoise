@@ -15,7 +15,7 @@ public:
     const sf::Vector2f& GetPosition() override;
     const sf::Vector2f& GetSize() override;
 
-    float textSizeWidget                                        {0.f};
+    float textWidgetSize                                        {0.f};
 private:
     std::unique_ptr<sf::Text> text                              {nullptr};
 };
