@@ -1,5 +1,8 @@
 #pragma once
 constexpr float elementPadding                                  {20.f};
+constexpr float enemyCharacterSize                              {50.f};
+constexpr float playerCharacterSize                             {75.f};
+constexpr float defaultCharacterSize                            {50.f};
 
 struct HBData
 {

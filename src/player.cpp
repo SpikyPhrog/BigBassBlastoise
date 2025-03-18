@@ -1,11 +1,12 @@
 #include "player.h"
 #include <iostream>
+#include "consts.h"
 
-Player::Player(const sf::Vector2f& characterSize, const sf::Vector2f& characterStartingPos, const sf::Font& font):
-Character(characterSize, characterStartingPos, font)
+Player::Player(const sf::Vector2f& characterStartingPos, const sf::Font& font):
+Character(characterStartingPos, font)
 {
     characterShape->setFillColor(sf::Color::Green);
-
+    characterShape->setSize(sf::Vector2f(playerCharacterSize, playerCharacterSize));
     std::string scoreString = "Score: " + std::to_string(score);
     std::string livesString = "Lives: " + std::to_string(lives);
 

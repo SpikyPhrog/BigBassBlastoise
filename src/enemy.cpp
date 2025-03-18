@@ -1,9 +1,11 @@
 #include "enemy.h"
 #include <iostream>
+#include "consts.h"
 
-Enemy::Enemy(const sf::Vector2f & characterSize, const sf::Vector2f & characterStartingPos, const sf::Font& font):
-Character(characterSize, characterStartingPos, font)
+Enemy::Enemy(const sf::Vector2f& characterStartingPos, const sf::Font& font):
+Character(characterStartingPos, font)
 {
+    characterShape->setSize(sf::Vector2f(enemyCharacterSize, enemyCharacterSize));
     characterShape->setFillColor(sf::Color::Blue);
     
     for (size_t i = 0; i < 10; i++)

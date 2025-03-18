@@ -1,8 +1,9 @@
 #include "character.h"
+#include "consts.h"
 
-Character::Character(const sf::Vector2f &characterSize, const sf::Vector2f& characterStartingPos, const sf::Font& font)
+Character::Character(const sf::Vector2f& characterStartingPos, const sf::Font& font)
 {
-    characterShape = std::make_unique<sf::RectangleShape>(characterSize);
+    characterShape = std::make_unique<sf::RectangleShape>(sf::Vector2f(defaultCharacterSize, defaultCharacterSize));
     characterShape->setPosition(characterStartingPos);
     characterShape->setFillColor(sf::Color::Blue);
     characterPos = characterStartingPos;

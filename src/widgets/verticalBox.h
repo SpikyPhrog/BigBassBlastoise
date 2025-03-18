@@ -1,6 +1,6 @@
 #pragma once
 #include "baseWidget.h"
-#include "widgetConsts.h"
+#include "../consts.h"
 
 
 

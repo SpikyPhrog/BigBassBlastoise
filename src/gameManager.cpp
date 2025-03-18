@@ -12,8 +12,8 @@ GameManager::GameManager(const AssetManager& inAssetManager, std::shared_ptr<sf:
 
     sf::Vector2f playerStartPos {0.f, windowHeight/2};
     
-    playerChar = std::make_shared<Player>(sf::Vector2f(75.f, 75.f), playerStartPos, *inAssetManager.gameFont);
-    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, playerChar);
+    playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager.gameFont);
+    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar);
     gameState = GameStates::MainMenu;
 }
 

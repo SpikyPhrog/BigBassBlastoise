@@ -5,7 +5,7 @@
 class Character : public sf::Drawable
 {
 public:
-    Character(const sf::Vector2f& characterSize, const sf::Vector2f& characterStartingPos, const sf::Font& font);
+    Character(const sf::Vector2f& characterStartingPos, const sf::Font& font);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
 
     virtual void update(const sf::Time& deltaTime);

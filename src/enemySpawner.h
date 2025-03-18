@@ -8,7 +8,7 @@
 class EnemySpawner : public sf::Drawable
 {
 public:
-    EnemySpawner(const AssetManager& assetManager, std::shared_ptr<Player> inPlayer);
+    EnemySpawner(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<Player> inPlayer);
 
     void update(const sf::Time& deltaTime);
     void ProcessInput(const char& input);

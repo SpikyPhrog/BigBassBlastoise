@@ -1,7 +1,7 @@
 #include "enemySpawner.h"
 #include <random>
 
-EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<Player> inPlayer)
+EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<Player> inPlayer)
 {
     std::random_device dev;
     std::mt19937 rng(dev());
@@ -13,8 +13,8 @@ EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<Pla
 
     for (int i = 0; i < 5; i++)
     {
-        float x = 700 + (i * 10);
-        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(50.f, 50.f), sf::Vector2f(x, i * 50), *assetManager.gameFont);
+        const float& StartX = window->getSize().x;
+        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(StartX, i * 50), *assetManager.gameFont);
         int randomId = dist(rng);
 
         std::advance(it, randomId);
