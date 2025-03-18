@@ -18,6 +18,7 @@ public:
 private:
     void DamagePlayer(std::shared_ptr<Enemy> enemy);
     void DestroyEnemy();
+    char ReverseInputCapitolisation(const char& input);
 
 private:
     std::vector<std::shared_ptr<Enemy>> enemyList               {};

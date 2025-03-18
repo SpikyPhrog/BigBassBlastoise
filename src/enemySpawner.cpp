@@ -49,7 +49,7 @@ void EnemySpawner::ProcessInput(const char & input)
     {
         for (size_t i = 0; i < enemyList.size(); i++)
         {
-            if (enemyList[i]->GetCurrentLetter() != nullptr && input == *enemyList[i]->GetCurrentLetter())
+            if (enemyList[i]->GetCurrentLetter() != nullptr && (input == *enemyList[i]->GetCurrentLetter() || ReverseInputCapitolisation(input) == *enemyList[i]->GetCurrentLetter()))
             {
                 enemyList[i]->SetIsFocused(true);
                 currentEnemy = enemyList[i];
@@ -64,6 +64,7 @@ void EnemySpawner::ProcessInput(const char & input)
     if (currentEnemy != nullptr)
     {    
         currentEnemy->ProcessInput(input);
+        currentEnemy->ProcessInput(ReverseInputCapitolisation(input));
 
         if (currentEnemy->GetIsCompleted())
         {
@@ -119,3 +120,22 @@ void EnemySpawner::DestroyEnemy()
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
     currentEnemyIndex = 0;
 }
+
+char EnemySpawner::ReverseInputCapitolisation(const char &input)
+{
+    char reverseInput = 0;
+    // check if its a capital letter
+    if (input >= 65 && input <= 90)
+    {
+        reverseInput = input + 32;
+    }
+    
+    // check if its a lowercase letter
+    if (input >= 97 && input <= 122)
+    {
+        reverseInput = input - 32;
+    }
+    
+    return reverseInput;
+}
+
