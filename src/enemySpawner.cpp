@@ -7,11 +7,13 @@ EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<sf:
     std::mt19937 rng(dev());
     std::uniform_int_distribution<std::mt19937::result_type> dist(1, assetManager.GetDictionarySize());
 
+    enemyList.reserve(9);
+
     player = inPlayer;
 
     std::unordered_set<std::string>::iterator it = assetManager.dictionary.begin();
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < 9; i++)
     {
         const float& StartX = window->getSize().x;
         std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(StartX, i * 50), *assetManager.gameFont);
