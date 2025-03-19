@@ -98,16 +98,8 @@ void EnemySpawner::draw(sf::RenderTarget & target, sf::RenderStates states) cons
 
 void EnemySpawner::DamagePlayer(std::shared_ptr<Enemy> enemy)
 {
-    if(!player)
-    {
-        std::cout << "PlayerNotFound\n"; 
-        return;
-    }
-    if (!enemy)
-    {
-        std::cout << "Enemy is null\n";
-        return;
-    }
+    assert(player != nullptr);
+    assert(enemy != nullptr);
     
     currentEnemy = enemy;
 
