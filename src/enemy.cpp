@@ -113,13 +113,11 @@ bool Enemy::CheckIfColliding(std::shared_ptr<sf::RectangleShape> rect)
 {
     if (!rect)
     {
-        std::cout << "Rectangle is null\n";
         return false;
     }
 
     if (characterShape->getPosition().x <= rect->getPosition().x + rect->getSize().x)
     {
-        std::cout << "Colliding with something\n";
         return true;
     }
 

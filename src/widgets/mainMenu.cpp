@@ -63,25 +63,21 @@ void MainMenu::update()
 
 void MainMenu::OnPlayClicked()
 {
-    std::cout << "Play Pressed\n";
     // GameManager::StartGame();
     GameManager::SetGameState(GameStates::Start);
 }
 
 void MainMenu::OnOptionsClicked()
 {
-    std::cout << "Options pressed\n";
     GameManager::SetGameState(GameStates::Options);
 }
 
 void MainMenu::OnQuitClicked()
 {
-    std::cout << "Quit Pressed\n";
     if (gameWindow)
     {
         gameWindow->close();
-    }
-    
+    }   
 }
 
 const sf::Vector2f & MainMenu::GetSize()

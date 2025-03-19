@@ -30,7 +30,6 @@ void EnemySpawner::update(const sf::Time & deltaTime)
             DamagePlayer(enemyList[i]);    
         }
     }
-
     if(enemiesDefeated >= enemiesSpawnedPerRound)
     {
         // run timer
@@ -112,7 +111,7 @@ void EnemySpawner::DestroyEnemy()
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
     currentEnemyIndex = 0;
     ++enemiesDefeated;
-    clock.reset();
+    clock.restart();
 }
 
 char EnemySpawner::ReverseInputCapitolisation(const char &input)

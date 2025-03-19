@@ -1,5 +1,6 @@
 #include "player.h"
 #include <iostream>
+#include "gameManager.h"
 #include "consts.h"
 
 Player::Player(const sf::Vector2f& characterStartingPos, const sf::Font& font):
@@ -61,7 +62,6 @@ void Player::DecreaseLives()
         livesText->setString(livesString);
         return;
     }
- 
-    std::cout << "GAME OVER \n";
     
+    GameManager::SetGameState(GameStates::GameOver);
 }
