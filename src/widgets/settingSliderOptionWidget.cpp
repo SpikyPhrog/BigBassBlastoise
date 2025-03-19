@@ -4,10 +4,10 @@
 #include "slider.h"
 #include "../assetManager.h"
 
-SettingSliderOptionWidget::SettingSliderOptionWidget(const AssetManager& assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window):
+SettingSliderOptionWidget::SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
 {
-    label = std::make_shared<TextWidget>(*assetManager.gameFont, inLabelText, window);
+    label = std::make_shared<TextWidget>(*assetManager->gameFont, inLabelText, window);
     slider = std::make_shared<Slider>(window);
 
     settings = hbSettings;

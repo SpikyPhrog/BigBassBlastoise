@@ -5,10 +5,10 @@
 #include "widgets/optionsMenu.h"
 #include "gameManager.h"
 
-UIManager::UIManager(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window)
+UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window)
 {
-    mainMenu = std::make_shared<MainMenu>(*assetManager.gameFont, window);
-    pauseMenu = std::make_shared<PauseMenu>(*assetManager.gameFont, window);
+    mainMenu = std::make_shared<MainMenu>(*assetManager->gameFont, window);
+    pauseMenu = std::make_shared<PauseMenu>(*assetManager->gameFont, window);
     optionsMenu = std::make_shared<OptionsMenu>(assetManager, window);
 }
 

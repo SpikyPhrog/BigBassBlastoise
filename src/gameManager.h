@@ -20,7 +20,7 @@ class GameManager : public sf::Drawable
 {
 
 public:
-    GameManager(const AssetManager& inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow);
+    GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void inputUpdate(const sf::Event::TextEntered* input);
     void update(const sf::Time& deltaTime);

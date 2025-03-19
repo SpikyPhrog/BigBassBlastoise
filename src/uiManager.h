@@ -9,7 +9,7 @@ class OptionsMenu;
 class UIManager : public sf::Drawable
 {
 public:
-    UIManager(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window);
+    UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void update();
 

@@ -9,7 +9,7 @@ class AssetManager;
 class OptionsMenu : public BaseWidget
 {
 public:
-    OptionsMenu(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window);
+    OptionsMenu(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     

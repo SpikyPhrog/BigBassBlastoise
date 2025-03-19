@@ -5,14 +5,14 @@
 GameStates GameManager::gameState = GameStates::MainMenu;
 GameStates GameManager::previousGameState = GameStates::MainMenu;
 
-GameManager::GameManager(const AssetManager& inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow)
+GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow)
 {
     float windowWidth = inWindow->getSize().x;
     float windowHeight = inWindow->getSize().y;
 
     sf::Vector2f playerStartPos {0.f, windowHeight/2};
     
-    playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager.gameFont);
+    playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager->gameFont);
     enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar);
     gameState = GameStates::MainMenu;
 }

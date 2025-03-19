@@ -7,9 +7,9 @@ int main(int argc, char** argv)
 {
     std::shared_ptr<sf::RenderWindow> window = std::make_shared<sf::RenderWindow>(sf::VideoMode({800, 600}), "WEEEEEEEEEEEEEEEEEEEEEEE");
    
-    AssetManager assetManager(argv);
+    std::shared_ptr<AssetManager> assetManager = std::make_shared<AssetManager>(argv);
 
-    // assetManager.mainMusic->play();
+    // assetManager->mainMusic->play();
 
     std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>(assetManager, window);
     std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, window);

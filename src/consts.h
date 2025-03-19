@@ -5,6 +5,8 @@ constexpr float playerCharacterSize                             {75.f};
 constexpr float defaultCharacterSize                            {50.f};
 constexpr float enemyMovementSpeed                              {10.f};
 constexpr int textSize                                          {20};
+constexpr int amountWaves                                       {5};
+constexpr int enemiesSpawnedPerRound                            {7};
 struct HBData
 {
     sf::Vector2f size                                           {0.f, 0.f};

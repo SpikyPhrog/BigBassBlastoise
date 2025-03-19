@@ -1,30 +1,18 @@
 #include "enemySpawner.h"
 #include <random>
+#include "consts.h"
 
-EnemySpawner::EnemySpawner(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window, std::shared_ptr<Player> inPlayer)
+std::random_device dev;
+std::mt19937 rng(dev());
+
+EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer)
 {
-    std::random_device dev;
-    std::mt19937 rng(dev());
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1, assetManager.GetDictionarySize());
-
-    enemyList.reserve(9);
-
     player = inPlayer;
+    window = inWindow;
+    assetManager = inAssetManager;
+    enemyList.reserve(enemiesSpawnedPerRound);
 
-    std::unordered_set<std::string>::iterator it = assetManager.dictionary.begin();
-
-    for (int i = 0; i < 9; i++)
-    {
-        const float& StartX = window->getSize().x;
-        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(StartX, i * 50), *assetManager.gameFont);
-        int randomId = dist(rng);
-
-        std::advance(it, randomId);
-
-        std::string randomWord = *it;
-        enemy->SetWord(randomWord.c_str());
-        enemyList.emplace_back(enemy);
-    }
+    SpawnWave();
 
     // switch the size to be screen height
     HitLine = std::make_shared<sf::RectangleShape>(sf::Vector2f{50.f, 600.f});
@@ -41,6 +29,15 @@ void EnemySpawner::update(const sf::Time & deltaTime)
         {
             DamagePlayer(enemyList[i]);    
         }
+    }
+
+    if(enemiesDefeated >= enemiesSpawnedPerRound)
+    {
+        enemiesDefeated = 0;
+        // run timer
+
+        // restart the wave
+        SpawnWave();
     }
 }
 
@@ -113,6 +110,7 @@ void EnemySpawner::DestroyEnemy()
     currentEnemy = nullptr;
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
     currentEnemyIndex = 0;
+    ++enemiesDefeated;
 }
 
 char EnemySpawner::ReverseInputCapitolisation(const char &input)
@@ -133,3 +131,21 @@ char EnemySpawner::ReverseInputCapitolisation(const char &input)
     return reverseInput;
 }
 
+void EnemySpawner::SpawnWave()
+{
+    std::uniform_int_distribution<std::mt19937::result_type> dist(1, assetManager->GetDictionarySize());
+    std::unordered_set<std::string>::iterator it = assetManager->dictionary.begin();
+
+    for (int i = 0; i < enemiesSpawnedPerRound; i++)
+    {
+        const float& StartX = window->getSize().x;
+        std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(StartX, i * 50), *assetManager->gameFont);
+        int randomId = dist(rng);
+
+        std::advance(it, randomId);
+
+        std::string randomWord = *it;
+        enemy->SetWord(randomWord.c_str());
+        enemyList.emplace_back(enemy);
+    }
+}

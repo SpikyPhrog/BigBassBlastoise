@@ -6,14 +6,14 @@
 #include "../assetManager.h"
 #include "../gameManager.h"
 
-OptionsMenu::OptionsMenu(const AssetManager& assetManager, std::shared_ptr<sf::RenderWindow> window): 
+OptionsMenu::OptionsMenu(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window): 
 BaseWidget(window)
 {
     VBData settings;
     settings.position = sf::Vector2f(350.f, 100.f);
 
     buttonVB = std::make_unique<VerticalBox>(settings, window);
-    backButton = std::make_shared<Button>(*assetManager.gameFont, "Back", window);
+    backButton = std::make_shared<Button>(*assetManager->gameFont, "Back", window);
     backButton->OnClick = std::bind(&OptionsMenu::OnClickedBack, this);
 
     HBData hbSettings;
