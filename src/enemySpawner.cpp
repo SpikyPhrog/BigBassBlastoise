@@ -33,11 +33,14 @@ void EnemySpawner::update(const sf::Time & deltaTime)
 
     if(enemiesDefeated >= enemiesSpawnedPerRound)
     {
-        enemiesDefeated = 0;
         // run timer
-
-        // restart the wave
-        SpawnWave();
+        if (clock.getElapsedTime() >= timeBetweenWaves)
+        {
+            enemiesDefeated = 0;
+    
+            // restart the wave
+            SpawnWave();
+        }
     }
 }
 
@@ -68,13 +71,11 @@ void EnemySpawner::ProcessInput(const char & input)
         if (currentEnemy->GetIsCompleted())
         {
             DestroyEnemy();
-            sf::Time time = clock.restart();
-            timeForWord = time.asSeconds();
             
             // award player
             if (player)
             {
-                player->UpdateScoring(timeForWord);
+                player->UpdateScoring(score);
             }      
         }
     }
@@ -111,6 +112,7 @@ void EnemySpawner::DestroyEnemy()
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
     currentEnemyIndex = 0;
     ++enemiesDefeated;
+    clock.reset();
 }
 
 char EnemySpawner::ReverseInputCapitolisation(const char &input)

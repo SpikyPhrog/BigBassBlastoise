@@ -32,6 +32,7 @@ private:
     int currentEnemyIndex                                       {0};
     int enemiesDefeated                                         {0};
     sf::Vector2f currentEnemyPos                                {0.f, 0.f};
+    float score                                                 {0};
     // To calculate the elapsed time from the start of the word to the end of it
     float timeForWord                                           {0.f};
     sf::Clock clock;

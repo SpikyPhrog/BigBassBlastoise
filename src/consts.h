@@ -7,6 +7,8 @@ constexpr float enemyMovementSpeed                              {10.f};
 constexpr int textSize                                          {20};
 constexpr int amountWaves                                       {5};
 constexpr int enemiesSpawnedPerRound                            {7};
+constexpr sf::Time timeBetweenWaves                             {sf::seconds(3.f)};
+
 struct HBData
 {
     sf::Vector2f size                                           {0.f, 0.f};
