@@ -37,4 +37,5 @@ user.bazelrc
 *.mp3
 /src/assets/fonts/
 /src/assets/music/
+/src/assets/dict/
 !/src/assets/BUILD
