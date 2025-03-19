@@ -3,6 +3,7 @@
 #include <iostream>
 #include <fstream>
 #include <windows.h>
+#include "consts.h"
 
 std::string getPath()
 {
@@ -23,16 +24,17 @@ AssetManager::AssetManager(char** argv)
     std::string error;
     std::unique_ptr<Runfiles> runfiles(Runfiles::Create(argv[0], &error));
 
-    std::string fontPath = getPath() + "\\assets/fonts/SalmonFont.otf";
-    std::string musicPath = getPath() + "\\assets/music/BMB.mp3";
-    std::string dictionaryPath = getPath() + "\\assets/dict/dictionary.txt";
+    std::string fontPath = getPath() + "\\" + fontFilePath;
+    std::string musicPath = getPath() + "\\" + musicFilePath;
+    std::string dictionaryPath = getPath() + "\\" + dictionaryFilePath;
 
 
     if (runfiles != nullptr)
     {
-        fontPath = runfiles->Rlocation("__main__/src/" + fontPath); 
-        musicPath = runfiles->Rlocation("__main__/src/" + musicPath);
-        dictionaryPath = runfiles->Rlocation("__main__/src/" + dictionaryPath);
+        std::string runfilesPath = "__main__/src/";
+        fontPath = runfiles->Rlocation(runfilesPath + fontFilePath); 
+        musicPath = runfiles->Rlocation(runfilesPath + musicFilePath);
+        dictionaryPath = runfiles->Rlocation(runfilesPath + dictionaryFilePath);
     }
 
     gameFont = std::make_shared<sf::Font>(fontPath);

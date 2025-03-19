@@ -9,6 +9,10 @@ constexpr int amountWaves                                       {5};
 constexpr int enemiesSpawnedPerRound                            {7};
 constexpr sf::Time timeBetweenWaves                             {sf::seconds(3.f)};
 
+constexpr const char* fontFilePath                              {"assets/fonts/SalmonFont.otf"}; 
+constexpr const char* musicFilePath                             {"assets/music/BMB.mp3"}; 
+constexpr const char* dictionaryFilePath                        {"assets/dict/dictionary.txt"};
+
 struct HBData
 {
     sf::Vector2f size                                           {0.f, 0.f};
