@@ -63,3 +63,12 @@ const sf::Vector2f& TextWidget::GetSize()
     }
     return sf::Vector2f(0.f, 0.f);
 }
+
+void TextWidget::CenterOrigin()
+{
+    if (text)
+    {
+        text->setOrigin(sf::Vector2f(textWidgetSize/2, textWidgetSize/2));
+    }
+    
+}

@@ -3,6 +3,7 @@
 #include "widgets/mainMenu.h"
 #include "widgets/pauseMenu.h"
 #include "widgets/optionsMenu.h"
+#include "widgets/gameOverWidget.h"
 #include "gameManager.h"
 
 UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window)
@@ -10,11 +11,12 @@ UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr
     mainMenu = std::make_shared<MainMenu>(*assetManager->gameFont, window);
     pauseMenu = std::make_shared<PauseMenu>(*assetManager->gameFont, window);
     optionsMenu = std::make_shared<OptionsMenu>(assetManager, window);
+    gameOverWidget = std::make_shared<GameOverWidget>(*assetManager->gameFont, window);
 }
 
 void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if (!mainMenu || !pauseMenu || !optionsMenu)
+    if (!mainMenu || !pauseMenu || !optionsMenu || !gameOverWidget)
     {
         return;
     }
@@ -31,6 +33,10 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
     
     case GameStates::Options:
         target.draw(*optionsMenu);
+        break;
+
+    case GameStates::GameOver:
+        target.draw(*gameOverWidget);
         break;
     }
 }

@@ -1,5 +1,4 @@
 #pragma once
-#include <iostream>
 #include "baseWidget.h"
 #include "button.h"
 #include "verticalBox.h"

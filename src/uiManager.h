@@ -5,6 +5,7 @@ class AssetManager;
 class MainMenu;
 class PauseMenu;
 class OptionsMenu;
+class GameOverWidget;
 
 class UIManager : public sf::Drawable
 {
@@ -17,4 +18,5 @@ private:
     std::shared_ptr<MainMenu> mainMenu                          {nullptr};
     std::shared_ptr<PauseMenu> pauseMenu                        {nullptr};
     std::shared_ptr<OptionsMenu> optionsMenu                    {nullptr};
+    std::shared_ptr<GameOverWidget> gameOverWidget              {nullptr};
 };

@@ -14,6 +14,7 @@ public:
     void SetPosition(const sf::Vector2f& newPosition) override;
     const sf::Vector2f& GetPosition() override;
     const sf::Vector2f& GetSize() override;
+    void CenterOrigin();
 
     float textWidgetSize                                        {0.f};
 private:
