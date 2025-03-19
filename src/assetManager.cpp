@@ -2,6 +2,15 @@
 #include "tools/cpp/runfiles/runfiles.h"
 #include <iostream>
 #include <fstream>
+#include <windows.h>
+
+std::string getPath()
+{
+    char buffer[_MAX_PATH];
+    GetModuleFileName(NULL, buffer, _MAX_PATH);
+    std::string::size_type pos = std::string(buffer).find_last_of("\\/");
+    return std::string(buffer).substr(0, pos); 
+}
 
 using bazel::tools::cpp::runfiles::Runfiles;
 
@@ -14,9 +23,9 @@ AssetManager::AssetManager(char** argv)
     std::string error;
     std::unique_ptr<Runfiles> runfiles(Runfiles::Create(argv[0], &error));
 
-    std::string fontPath = "assets/fonts/SalmonFont.otf";
-    std::string musicPath = "assets/music/BMB.mp3";
-    std::string dictionaryPath = "assets/dict/dictionary.txt";
+    std::string fontPath = getPath() + "\\assets/fonts/SalmonFont.otf";
+    std::string musicPath = getPath() + "\\assets/music/BMB.mp3";
+    std::string dictionaryPath = getPath() + "\\assets/dict/dictionary.txt";
 
 
     if (runfiles != nullptr)

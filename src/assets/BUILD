@@ -9,7 +9,19 @@ filegroup(
 
 
 pkg_files(
-        name = "pkg_assets",
-        srcs = [":assets"],
+        name = "pkg_font_assets",
+        srcs = glob(["fonts/*"]),
         prefix = "assets/fonts/",
+)
+
+pkg_files(
+        name = "pkg_music_assets",
+        srcs = glob(["music/*"]),
+        prefix = "assets/music/",
+)
+
+pkg_files(
+        name = "pkg_dict_assets",
+        srcs = glob(["dict/*"]),
+        prefix = "assets/dict/",
 )

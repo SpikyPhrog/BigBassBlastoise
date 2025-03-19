@@ -26,7 +26,9 @@ pkg_zip(
         name = "package",
         srcs = [
                 "//src",
-                "//src/assets:pkg_assets",
+                "//src/assets:pkg_font_assets",
+                "//src/assets:pkg_music_assets",
+                "//src/assets:pkg_dict_assets",
                 "@sfml//:dlls",
         ],
 )
