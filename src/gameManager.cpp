@@ -41,7 +41,6 @@ void GameManager::inputUpdate(const sf::Event::TextEntered* input)
         gameState = GameStates::Paused;
     }
     
-
     if(input->unicode < 128)
     {
         enemySpawner->ProcessInput(input->unicode);
@@ -50,7 +49,7 @@ void GameManager::inputUpdate(const sf::Event::TextEntered* input)
 
 void GameManager::update(const sf::Time &deltaTime)
 {
-    if (gameState == GameStates::Start && gameState != GameStates::GameOver)
+    if (gameState == GameStates::Start)
     {
         playerChar->SetPosition(enemySpawner->GetEnemyPos());
         enemySpawner->update(deltaTime);

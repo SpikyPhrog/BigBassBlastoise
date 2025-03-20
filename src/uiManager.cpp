@@ -4,6 +4,7 @@
 #include "widgets/pauseMenu.h"
 #include "widgets/optionsMenu.h"
 #include "widgets/gameOverWidget.h"
+#include "widgets/playerHUDWidget.h"
 #include "gameManager.h"
 
 UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window)
@@ -12,11 +13,12 @@ UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr
     pauseMenu = std::make_shared<PauseMenu>(*assetManager->gameFont, window);
     optionsMenu = std::make_shared<OptionsMenu>(assetManager, window);
     gameOverWidget = std::make_shared<GameOverWidget>(*assetManager->gameFont, window);
+    playerHUD = std::make_shared<PlayerHUD>(*assetManager->gameFont, window);
 }
 
 void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 {
-    if (!mainMenu || !pauseMenu || !optionsMenu || !gameOverWidget)
+    if (!mainMenu || !pauseMenu || !optionsMenu || !gameOverWidget || !playerHUD)
     {
         return;
     }
@@ -38,6 +40,10 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
     case GameStates::GameOver:
         target.draw(*gameOverWidget);
         break;
+
+    case GameStates::Start:
+        target.draw(*playerHUD);
+        break;
     }
 }
 
@@ -56,6 +62,16 @@ void UIManager::update()
     if (optionsMenu && GameManager::GetGameState() == GameStates::Options)
     {
         optionsMenu->update();
+    }
+    
+    if (gameOverWidget && GameManager::GetGameState() == GameStates::GameOver)
+    {
+        gameOverWidget->update();
+    }
+
+    if (playerHUD && GameManager::GetGameState() == GameStates::Start)
+    {
+        playerHUD->update();
     }
     
 }

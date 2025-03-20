@@ -5,9 +5,7 @@ MainMenu::MainMenu(const sf::Font& font, std::shared_ptr<sf::RenderWindow> windo
 BaseWidget(window)
 {     
     VBData data;
-    data.size = sf::Vector2f {400.f, 0.f};
     data.position = sf::Vector2f{300.f, 0.f};
-    data.bFullHeight = true;
 
     buttonVB = std::make_shared<VerticalBox>(data, window);
     playButton = std::make_shared<Button>(font, "Play", window);
@@ -33,8 +31,7 @@ void MainMenu::draw(sf::RenderTarget & target, sf::RenderStates states) const
     if (buttonVB)
     {
         target.draw(*buttonVB);
-    }
-    
+    }  
 }
 
 const sf::Vector2f & MainMenu::GetPosition()
@@ -57,8 +54,7 @@ void MainMenu::update()
     if (buttonVB)
     {
         buttonVB->update();
-    }
-    
+    }  
 }
 
 void MainMenu::OnPlayClicked()

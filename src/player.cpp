@@ -8,21 +8,11 @@ Character(characterStartingPos, font)
 {
     characterShape->setFillColor(sf::Color::Green);
     characterShape->setSize(sf::Vector2f(playerCharacterSize, playerCharacterSize));
-    std::string scoreString = "Score: " + std::to_string(score);
-    std::string livesString = "Lives: " + std::to_string(lives);
-
-    scoreText = std::make_unique<sf::Text>(font, scoreString, 25);
-    livesText = std::make_unique<sf::Text>(font, livesString, 25);
-
-    scoreText->setPosition(sf::Vector2f(0.f, 0.f));
-    livesText->setPosition(sf::Vector2f(100.f, 0.f));
 }
 
 void Player::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     Character::draw(target, states);
-    target.draw(*scoreText);
-    target.draw(*livesText);
 }
 
 void Player::update(const sf::Time& deltaTime)
@@ -35,7 +25,7 @@ void Player::UpdateScoring(float timeForWord)
     score += (1 / timeForWord )* 10;
     std::string scoreString = "Score: " + std::to_string(score);
     
-    scoreText->setString(scoreString);
+    // scoreText->setString(scoreString);
 
     IncreaseLives();
 }
@@ -49,7 +39,7 @@ void Player::IncreaseLives()
     }
     
     std::string livesString = "Lives: " + std::to_string(lives);
-    livesText->setString(livesString);
+    // livesText->setString(livesString);
 }
 
 void Player::DecreaseLives()
@@ -59,7 +49,7 @@ void Player::DecreaseLives()
         lives --;
         
         std::string livesString = "Lives: " + std::to_string(lives);
-        livesText->setString(livesString);
+        // livesText->setString(livesString);
         return;
     }
     

@@ -36,21 +36,7 @@ void VerticalBox::SetPosition(const sf::Vector2f &newPosition)
     assert(vbShape != nullptr);
     vbShape->setPosition(newPosition);
     
-    if (children.size() > 0)
-    {
-        sf::Vector2f lastElementPos {0.f, 0.f};
-        float element_size = 0;
-
-        for (auto child : children)
-        {
-            assert(child != nullptr);
-            lastElementPos.x = vbShape->getPosition().x - child->GetSize().x / 2;
-            lastElementPos.y = vbShape->getPosition().y + element_size + elementPadding;
-            child->SetPosition(lastElementPos);
-            element_size = child->GetSize().y;
-        }   
-    }
-    
+    SetChildrenPosition();
 }
 
 const sf::Vector2f &VerticalBox::GetPosition()
@@ -71,13 +57,31 @@ void VerticalBox::update()
 
 void VerticalBox::AddWidget(std::shared_ptr<BaseWidget> widgetToAdd)
 {
-    lastChildPosition.y += vbSettings.position.y + widgetToAdd->GetSize().y; 
-    lastChildPosition.x = vbSettings.position.x;   
-    widgetToAdd->SetPosition(lastChildPosition);
     children.emplace_back(widgetToAdd);
+    SetChildrenPosition();
 }
 
 const sf::Vector2f &VerticalBox::GetSize()
 {
     return vbShape->getSize();
+}
+
+void VerticalBox::SetChildrenPosition()
+{
+    if (children.size() > 0)
+    {
+        sf::Vector2f lastElementPos {0.f, 0.f};
+        float lastChildPosY = 0;
+        float element_size = 0;
+
+        for (auto child : children)
+        {
+            assert(child != nullptr);
+            lastElementPos.x = vbShape->getPosition().x - child->GetSize().x / 2;
+            lastElementPos.y = vbShape->getPosition().y + lastChildPosY + element_size + elementPadding;
+            child->SetPosition(lastElementPos);
+            lastChildPosY = lastElementPos.y;
+            element_size = child->GetSize().y;
+        }  
+    }
 }

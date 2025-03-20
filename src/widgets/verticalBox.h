@@ -16,6 +16,9 @@ public:
     void update() override;
     void AddWidget(std::shared_ptr<BaseWidget> widgetToAdd);
     
+private:
+    void SetChildrenPosition();
+
 private:    
     std::vector<std::shared_ptr<BaseWidget>> children           {}; 
     std::unique_ptr<sf::RectangleShape> vbShape                 {nullptr};

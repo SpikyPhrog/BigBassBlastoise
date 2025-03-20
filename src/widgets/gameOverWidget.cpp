@@ -1,5 +1,8 @@
 #include "gameOverWidget.h"
 #include "textWidget.h"
+#include "button.h"
+#include "verticalBox.h"
+#include "../gameManager.h"
 
 GameOverWidget::GameOverWidget(const sf::Font& font, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -10,22 +13,37 @@ BaseWidget(window)
     background = std::make_unique<sf::RectangleShape>(size);
     background->setFillColor(sf::Color::Magenta);
 
-    gameOverText = std::make_unique<TextWidget>(font, "Game Over", window);
-    gameOverText->SetPosition(sf::Vector2f(windowSizeX/2, windowSizeY/2));
-    gameOverText->CenterOrigin();
+    gameOverText = std::make_shared<TextWidget>(font, "Game Over", window);
+
+    goBackButton = std::make_shared<Button>(font, "Main Menu", window);
+    goBackButton->OnClick = std::bind(&GameOverWidget::GoToMainMenu, this);
+
+    VBData settings;
+    settings.position = sf::Vector2f(windowSizeX/2, 0);
+
+    verticalBox = std::make_unique<VerticalBox>(settings, window);
+    verticalBox->AddWidget(gameOverText);
+    verticalBox->AddWidget(goBackButton);
 }
 
 void GameOverWidget::draw(sf::RenderTarget &target, sf::RenderStates states) const
 {
     assert(background != nullptr);
     assert(gameOverText != nullptr);
+    assert(goBackButton != nullptr);
+    assert(verticalBox != nullptr);
 
     target.draw(*background);
-    gameOverText->draw(target, states);
+    target.draw(*verticalBox);
 }
 
 void GameOverWidget::SetPosition(const sf::Vector2f &newPosition)
 {
+    if (verticalBox)
+    {
+        verticalBox->SetPosition(newPosition);
+    }
+    
 }
 
 const sf::Vector2f &GameOverWidget::GetPosition()
@@ -48,4 +66,13 @@ const sf::Vector2f &GameOverWidget::GetSize()
 
 void GameOverWidget::update()
 {
+    if (goBackButton)
+    {
+        goBackButton->update();
+    }   
+}
+
+void GameOverWidget::GoToMainMenu()
+{
+    GameManager::SetGameState(GameStates::MainMenu);
 }

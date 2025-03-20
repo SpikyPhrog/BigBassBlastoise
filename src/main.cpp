@@ -35,8 +35,8 @@ int main(int argc, char** argv)
         
         window->clear(sf::Color::Black);
         
-        window->draw(*uiManager);
         window->draw(*gameManager);
+        window->draw(*uiManager);
 
         window->display();
     }

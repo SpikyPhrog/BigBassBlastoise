@@ -2,6 +2,8 @@
 #include "baseWidget.h"
 
 class TextWidget;
+class Button;
+class VerticalBox;
 
 class GameOverWidget : public BaseWidget
 {
@@ -15,6 +17,11 @@ public:
     void update();
 
 private:
+    void GoToMainMenu();
+
+private:
     std::unique_ptr<sf::RectangleShape> background              {nullptr};
-    std::unique_ptr<TextWidget> gameOverText                    {nullptr};
+    std::shared_ptr<TextWidget> gameOverText                    {nullptr};
+    std::shared_ptr<Button> goBackButton                        {nullptr};
+    std::unique_ptr<VerticalBox> verticalBox                    {nullptr};
 };
