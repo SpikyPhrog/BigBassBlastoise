@@ -1,15 +1,18 @@
 #include "enemySpawner.h"
 #include <random>
 #include "consts.h"
+#include "eventManager.h"
+#include "statManager.h"
 
 std::random_device dev;
 std::mt19937 rng(dev());
 
-EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer)
+EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer, std::shared_ptr<EventManager> inEventManager)
 {
     player = inPlayer;
     window = inWindow;
     assetManager = inAssetManager;
+    eventManager = inEventManager;
     enemyList.reserve(enemiesSpawnedPerRound);
 
     SpawnWave();
@@ -69,13 +72,10 @@ void EnemySpawner::ProcessInput(const char & input)
 
         if (currentEnemy->GetIsCompleted())
         {
+            assert(eventManager != nullptr);
+
+            eventManager->Broadcast(EventTypes::UI_SCORE, StatManager::UpdateScoring(currentEnemy->GetRewardDrop()));  
             DestroyEnemy();
-            
-            // award player
-            if (player)
-            {
-                player->UpdateScoring(score);
-            }      
         }
     }
     
@@ -95,13 +95,14 @@ void EnemySpawner::draw(sf::RenderTarget & target, sf::RenderStates states) cons
 
 void EnemySpawner::DamagePlayer(std::shared_ptr<Enemy> enemy)
 {
-    assert(player != nullptr);
     assert(enemy != nullptr);
-    
+    assert(eventManager != nullptr);
+
     currentEnemy = enemy;
 
+    eventManager->Broadcast(EventTypes::UI_LIVES, StatManager::UpdateHealth(-1));  
+
     DestroyEnemy();
-    player->DecreaseLives();
 }
 
 void EnemySpawner::DestroyEnemy()

@@ -9,18 +9,15 @@ public:
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void update(const sf::Time& deltaTime) override;
     void ProcessInput(const char& input);
-    
-    
-    
+
     void SetWord(const char* inWord);
     const std::string GetWord();
 
     bool GetIsFocused() const { return bIsFocused; }
     void SetIsFocused(bool isFocused);
-
     bool GetIsCompleted() const { return bIsCompleted; }
-
-    const char* GetCurrentLetter() const { return currentLetter; }
+    const char* GetCurrentLetter() const                        { return currentLetter; }
+    const int& GetRewardDrop() const                            { return rewardDrop; }
 
     void Knockback();
 
@@ -38,4 +35,5 @@ private:
     bool bIsFocused                                             {false};
     char* currentLetter                                         {nullptr};
     char word[10]                                               {};
+    int rewardDrop                                              {0};
 };

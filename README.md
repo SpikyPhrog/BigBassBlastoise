@@ -12,7 +12,6 @@ Until then enjoy this gif and feel free to dig through this little mess of a cod
 # How to build it yourself
 ## Requirements:
 - bazel 7.5.0
-- [todo: try to build it on a different machine to get all deps]
 
 
 ## How?

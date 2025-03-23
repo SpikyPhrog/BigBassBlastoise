@@ -5,10 +5,12 @@
 #include "assetManager.h"
 #include "SFML/System/Time.hpp"
 
+class EventManager;
+
 class EnemySpawner : public sf::Drawable
 {
 public:
-    EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer);
+    EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer, std::shared_ptr<EventManager> inEventManager);
 
     void update(const sf::Time& deltaTime);
     void ProcessInput(const char& input);
@@ -29,6 +31,7 @@ private:
     std::shared_ptr<Player> player                              {nullptr};
     std::shared_ptr<AssetManager> assetManager                  {nullptr};
     std::shared_ptr<sf::RenderWindow> window                    {nullptr};
+    std::shared_ptr<EventManager> eventManager                  {nullptr};
     int currentEnemyIndex                                       {0};
     int enemiesDefeated                                         {0};
     sf::Vector2f currentEnemyPos                                {0.f, 0.f};

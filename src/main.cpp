@@ -2,6 +2,7 @@
 #include "gameManager.h"
 #include "assetManager.h"
 #include "uiManager.h"
+#include "eventManager.h"
 
 int main(int argc, char** argv)
 {
@@ -11,8 +12,9 @@ int main(int argc, char** argv)
 
     // assetManager->mainMusic->play();
 
-    std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>(assetManager, window);
-    std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, window);
+    std::shared_ptr<EventManager> eventManager = std::make_shared<EventManager>();
+    std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>(assetManager, eventManager, window);
+    std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, eventManager, window);
 
     sf::Clock deltaClock;
 

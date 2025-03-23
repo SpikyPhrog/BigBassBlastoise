@@ -8,6 +8,8 @@ Character(characterStartingPos, font)
     characterShape->setSize(sf::Vector2f(enemyCharacterSize, enemyCharacterSize));
     characterShape->setFillColor(sf::Color::Blue);
     
+    rewardDrop = enemyRewardDrop;
+
     for (size_t i = 0; i < 10; i++)
     {
         wordTextArray[i] = std::make_unique<sf::Text>(font, "", textSize);

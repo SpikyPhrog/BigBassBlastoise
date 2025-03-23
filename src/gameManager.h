@@ -16,11 +16,13 @@ enum class GameStates
     GameOver
 };
 
+class EventManager;
+
 class GameManager : public sf::Drawable
 {
 
 public:
-    GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow);
+    GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<EventManager> inEventManager, std::shared_ptr<sf::RenderWindow> inWindow);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void inputUpdate(const sf::Event::TextEntered* input);
     void update(const sf::Time& deltaTime);
@@ -30,8 +32,8 @@ public:
     static const GameStates& GetPreviousGameState();
     static void SetGameState(const GameStates& newState);
 private:
-    std::unique_ptr<EnemySpawner> enemySpawner                  { nullptr };
-    std::shared_ptr<Player> playerChar                          { nullptr };
+    std::unique_ptr<EnemySpawner> enemySpawner                  {nullptr};
+    std::shared_ptr<Player> playerChar                          {nullptr};
 
     static GameStates gameState;
     static GameStates previousGameState;

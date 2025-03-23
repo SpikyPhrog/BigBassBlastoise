@@ -1,11 +1,12 @@
 #include "gameManager.h"
 #include "enemySpawner.h"
 #include "assetManager.h"
+#include "eventManager.h"
 
 GameStates GameManager::gameState = GameStates::MainMenu;
 GameStates GameManager::previousGameState = GameStates::MainMenu;
 
-GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow)
+GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<EventManager> inEventManager, std::shared_ptr<sf::RenderWindow> inWindow)
 {
     float windowWidth = inWindow->getSize().x;
     float windowHeight = inWindow->getSize().y;
@@ -13,8 +14,8 @@ GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shar
     sf::Vector2f playerStartPos {0.f, windowHeight/2};
     
     playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager->gameFont);
-    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar);
     gameState = GameStates::MainMenu;
+    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar, inEventManager);
 }
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const

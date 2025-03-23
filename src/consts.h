@@ -1,4 +1,6 @@
 #pragma once
+#include "SFML/System/Time.hpp"
+#include "SFML/System/Vector2.hpp"
 constexpr float elementPadding                                  {20.f};
 constexpr float enemyCharacterSize                              {50.f};
 constexpr float playerCharacterSize                             {75.f};
@@ -7,6 +9,8 @@ constexpr float enemyMovementSpeed                              {10.f};
 constexpr int textSize                                          {20};
 constexpr int amountWaves                                       {5};
 constexpr int enemiesSpawnedPerRound                            {7};
+constexpr int enemyRewardDrop                                   {100};
+constexpr int playerStartHealth                                 {3};
 constexpr sf::Time timeBetweenWaves                             {sf::seconds(3.f)};
 
 constexpr const char* fontFilePath                              {"assets/fonts/SalmonFont.otf"}; 
@@ -28,4 +32,10 @@ struct VBData
     bool bIsFullscreen                                          {false};
     bool bFullHeight                                            {false};
     bool bFullWidth                                             {false};
+};
+
+enum class EventTypes 
+{
+    UI_SCORE,
+    UI_LIVES
 };
