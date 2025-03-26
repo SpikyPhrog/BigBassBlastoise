@@ -7,6 +7,7 @@ PauseMenu::PauseMenu(const sf::Font & font, std::shared_ptr<sf::RenderWindow> wi
 BaseWidget(window)
 {
     VBData settings;
+    settings.position = sf::Vector2f(300.f, 100.f);
 
     buttonsVB = std::make_shared<VerticalBox>(settings, window);
     resumeGameButton = std::make_shared<Button>(font, "Resume", window);
@@ -80,8 +81,5 @@ void PauseMenu::OnOptionsClicked()
 
 void PauseMenu::OnQuitClicked()
 {
-    if (gameWindow)
-    {
-        gameWindow->close();
-    }
+    GameManager::SetGameState(GameStates::MainMenu);
 }

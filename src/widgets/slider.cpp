@@ -5,7 +5,7 @@ Slider::Slider(std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
 {
     sliderLine = std::make_shared<sf::RectangleShape>(sf::Vector2f{120.f, 25.f});
-    sliderKnob = std::make_shared<sf::CircleShape>(26);
+    sliderKnob = std::make_shared<sf::CircleShape>(15);
 
     sliderKnob->setFillColor(sf::Color::Red);
     float knobRadius = sliderKnob->getRadius();
@@ -46,13 +46,13 @@ void Slider::update()
     sf::Vector2f knobPosition = sliderKnob->getPosition();
 
     float formula = Maths::Power<float>(mousePosition.x - knobPosition.x) + Maths::Power<float>(mousePosition.y - knobPosition.y);
-    float result = 0;
     if (formula < Maths::Power<float>(sliderKnob->getRadius()))
     {
         sliderKnob->setFillColor(HoveredColor);
         
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
+            float result = 0;
             sliderKnob->setFillColor(ClickedColor);
             result = Maths::Clamp((float)mousePosition.x, startPoint.x, endPoint.x);
             value = Maths::Normalise(result, startPoint.x, endPoint.x);
@@ -68,8 +68,17 @@ void Slider::update()
 
 void Slider::AlignKnobPosition()
 {
-    float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y / 2);
-    float knobPosX = sliderLine->getPosition().x;
+    float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y * .5f);
+    float knobPosX = sliderLine->getPosition().x + sliderKnob->getRadius() * .5f;
 
     sliderKnob->setPosition(sf::Vector2f(knobPosX, knobPosY));
+}
+
+void Slider::SetValue(const float &inValue)
+{
+    value = inValue;
+    float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y / 2);
+    // float knobPosX = 
+
+    // sliderKnob->setPosition()
 }

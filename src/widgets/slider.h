@@ -13,7 +13,7 @@ public:
     void update() override;
 
     const float& GetValue() { return value; }
-
+    void SetValue(const float& inValue);
 private:
     void AlignKnobPosition();
 
@@ -29,4 +29,5 @@ private:
     sf::Color HoveredColor                                      {sf::Color::Green};
     sf::Color NormalColor                                       {sf::Color::Red};
     sf::Color ClickedColor                                      {sf::Color::Cyan};
+    float steps                                                 {0.01};
 };
