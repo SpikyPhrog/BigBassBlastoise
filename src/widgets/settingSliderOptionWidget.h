@@ -17,6 +17,7 @@ public:
     void SetPosition(const sf::Vector2f& newPosition) override;
     const sf::Vector2f& GetPosition() override;
     const sf::Vector2f& GetSize() override;
+    void SetSliderValue(const float& inValue);
     
 private:
     HBData settings; 

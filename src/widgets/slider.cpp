@@ -12,6 +12,7 @@ BaseWidget(window)
     sliderKnob->setOrigin(sf::Vector2f(knobRadius, knobRadius));
 
     SetPosition(sf::Vector2f{0.f, 0.f});
+    SetValue(1);
 }
 
 void Slider::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -27,6 +28,8 @@ void Slider::SetPosition(const sf::Vector2f & newPosition)
     
     startPoint.x = sliderLine->getPosition().x;
     endPoint.x = sliderLine->getPosition().x + sliderLine->getSize().x;
+
+    SetValue(value);
 }
 
 const sf::Vector2f& Slider::GetPosition()
@@ -52,7 +55,7 @@ void Slider::update()
         
         if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
         {
-            float result = 0;
+            float result = value;
             sliderKnob->setFillColor(ClickedColor);
             result = Maths::Clamp((float)mousePosition.x, startPoint.x, endPoint.x);
             value = Maths::Normalise(result, startPoint.x, endPoint.x);
@@ -78,7 +81,6 @@ void Slider::SetValue(const float &inValue)
 {
     value = inValue;
     float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y / 2);
-    // float knobPosX = 
-
-    // sliderKnob->setPosition()
+    float knobPosX = (inValue * (endPoint.x - startPoint.x)) + startPoint.x;
+    sliderKnob->setPosition(sf::Vector2f(knobPosX, knobPosY));
 }

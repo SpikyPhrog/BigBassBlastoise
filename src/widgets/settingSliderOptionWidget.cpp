@@ -44,3 +44,10 @@ const sf::Vector2f & SettingSliderOptionWidget::GetSize()
 {
     return settings.size;
 }
+
+void SettingSliderOptionWidget::SetSliderValue(const float &inValue)
+{
+    assert(slider != nullptr);
+
+    slider->SetValue(inValue);
+}
