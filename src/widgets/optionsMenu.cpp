@@ -22,7 +22,6 @@ BaseWidget(window)
 
     musicSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Master Volume", hbSettings, window);
     musicSliderOption->SetSliderValue(.6f);
-    // hbSettings.position += sf::Vector2f(0, musicSliderOption->GetSize().y);
     testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window);
 
     buttonVB->AddWidget(musicSliderOption);

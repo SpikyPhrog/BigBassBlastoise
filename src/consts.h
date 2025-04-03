@@ -1,4 +1,6 @@
 #pragma once
+#include "eventStructs.h"
+
 #include "SFML/System/Time.hpp"
 #include "SFML/System/Vector2.hpp"
 constexpr float elementPadding                                  {20.f};
@@ -24,11 +26,8 @@ struct HBData
     sf::Vector2f padding                                        {0.f, 0.f};
 };
 
-struct VBData 
+struct VBData : HBData 
 {
-    sf::Vector2f size                                           {0.f, 0.f};
-    sf::Vector2f position                                       {0.f, 0.f};
-    sf::Vector2f padding                                        {0.f, 0.f};
     bool bIsFullscreen                                          {false};
     bool bFullHeight                                            {false};
     bool bFullWidth                                             {false};
@@ -37,5 +36,9 @@ struct VBData
 enum class EventTypes 
 {
     UI_SCORE,
-    UI_LIVES
+    UI_LIVES,
+
+    GS_GameOver,
+    GS_Start,
 };
+

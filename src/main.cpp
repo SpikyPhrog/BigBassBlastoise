@@ -13,8 +13,11 @@ int main(int argc, char** argv)
     // assetManager->mainMusic->play();
 
     std::shared_ptr<EventManager> eventManager = std::make_shared<EventManager>();
-    std::unique_ptr<GameManager> gameManager = std::make_unique<GameManager>(assetManager, eventManager, window);
-    std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, eventManager, window);
+    std::shared_ptr<GameManager> gameManager = std::make_shared<GameManager>(assetManager, window);
+    std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, window);
+
+    EventManager::GetInstance()->Add(EventTypes::GS_GameOver, gameManager);
+    EventManager::GetInstance()->Add(EventTypes::GS_Start, gameManager);
 
     sf::Clock deltaClock;
 

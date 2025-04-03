@@ -36,11 +36,19 @@ void PlayerHealthWidget::update()
 
 }
 
-void PlayerHealthWidget::Update(const int& data)
+void PlayerHealthWidget::Update(void* inData)
 {
-    assert(livesText != nullptr);
+    UI_Data* data = nullptr;
 
-    std::string lives = "Lives: " + std::to_string(data);
+    if (inData != nullptr)
+    {
+        data = static_cast<UI_Data*>(inData);
+    }
     
-    livesText->setString(lives);
+    if (data != nullptr)
+    {
+        std::string lives = "Lives: " + std::to_string(data->data);
+        
+        livesText->setString(lives);
+    }
 }

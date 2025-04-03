@@ -3,5 +3,5 @@
 class EventListener
 {
 public:
-    virtual void Update(const int& data) = 0;
+    virtual void Update(void* data){};
 };

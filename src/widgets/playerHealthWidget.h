@@ -13,7 +13,7 @@ public:
     const sf::Vector2f& GetPosition() override;
     const sf::Vector2f& GetSize() override;
     void update() override;
-    void Update(const int& data) override;
+    void Update(void* inData) override;
 
 private:
     std::unique_ptr<sf::Text> livesText                         {nullptr};

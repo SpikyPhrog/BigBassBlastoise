@@ -1,6 +1,18 @@
 #include "eventManager.h"
 #include "eventListener.h"
 
+std::shared_ptr<EventManager> EventManager::eventManager_ = nullptr;
+
+std::shared_ptr<EventManager> EventManager::GetInstance()
+{
+    if(eventManager_ == nullptr)
+    {
+        eventManager_ = std::make_shared<EventManager>();
+    }
+
+    return eventManager_;
+}
+
 void EventManager::Add(const EventTypes &eventType, std::shared_ptr<EventListener> listener)
 {
     listeners.insert({eventType, listener});
@@ -20,7 +32,7 @@ void EventManager::Remove(const EventTypes &eventType, std::shared_ptr<EventList
     }
 }
 
-void EventManager::Broadcast(const EventTypes &eventType, const int &data)
+void EventManager::Broadcast(const EventTypes &eventType, void* data)
 {
     if(listeners.size() > 0 )
     {
@@ -32,5 +44,5 @@ void EventManager::Broadcast(const EventTypes &eventType, const int &data)
             }
         }
     }
-    
 }
+ 

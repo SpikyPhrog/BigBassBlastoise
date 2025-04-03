@@ -7,15 +7,14 @@
 std::random_device dev;
 std::mt19937 rng(dev());
 
-EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer, std::shared_ptr<EventManager> inEventManager)
+EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer)
 {
     player = inPlayer;
     window = inWindow;
     assetManager = inAssetManager;
-    eventManager = inEventManager;
     enemyList.reserve(enemiesSpawnedPerRound);
 
-    SpawnWave();
+    // SpawnWave();
 
     // switch the size to be screen height
     HitLine = std::make_shared<sf::RectangleShape>(sf::Vector2f{50.f, 600.f});
@@ -72,10 +71,15 @@ void EnemySpawner::ProcessInput(const char & input)
 
         if (currentEnemy->GetIsCompleted())
         {
-            assert(eventManager != nullptr);
+            UI_Data data;
+            data.data = StatManager::UpdateScoring(currentEnemy->GetRewardDrop());
 
-            eventManager->Broadcast(EventTypes::UI_SCORE, StatManager::UpdateScoring(currentEnemy->GetRewardDrop()));  
+            void* dataPtr = &data;
+
+            EventManager::GetInstance()->Broadcast(EventTypes::UI_SCORE, dataPtr);  
             DestroyEnemy();
+
+            dataPtr = nullptr;
         }
     }
     
@@ -96,17 +100,28 @@ void EnemySpawner::draw(sf::RenderTarget & target, sf::RenderStates states) cons
 void EnemySpawner::DamagePlayer(std::shared_ptr<Enemy> enemy)
 {
     assert(enemy != nullptr);
-    assert(eventManager != nullptr);
-
+    
     currentEnemy = enemy;
 
-    eventManager->Broadcast(EventTypes::UI_LIVES, StatManager::UpdateHealth(-1));  
+    UI_Data data;
+    data.data = StatManager::UpdateHealth(-1);
+
+    void* dataPtr = &data;
+
+    EventManager::GetInstance()->Broadcast(EventTypes::UI_LIVES, dataPtr);  
 
     DestroyEnemy();
+
+    dataPtr = nullptr;
 }
 
 void EnemySpawner::DestroyEnemy()
 {
+    if (enemyList.size() <= 0)
+    {
+        return;
+    }
+    
     currentEnemy->SetIsFocused(false);
     currentEnemy = nullptr;
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
@@ -150,4 +165,14 @@ void EnemySpawner::SpawnWave()
         enemy->SetWord(randomWord.c_str());
         enemyList.emplace_back(enemy);
     }
+}
+
+void EnemySpawner::Reset()
+{
+    enemyList.clear();
+}
+
+void EnemySpawner::Start()
+{
+    SpawnWave();
 }

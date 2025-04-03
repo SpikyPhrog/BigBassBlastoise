@@ -1,4 +1,5 @@
 #include "playerScoreWidget.h"
+#include "../eventStructs.h"
 
 PlayerScoreWidget::PlayerScoreWidget(const sf::Font& font, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -34,8 +35,19 @@ void PlayerScoreWidget::update()
 
 }
 
-void PlayerScoreWidget::Update(const int& data)
+void PlayerScoreWidget::Update(void* inData)
 {
-    std::string score = "Score: " + std::to_string(data);
-    scoreText->setString(score);
+    UI_Data* data = nullptr;
+
+    if (inData != NULL)
+    {
+        data = static_cast<UI_Data*>(inData);
+    }
+    
+    if (data != nullptr)
+    {
+        std::string score = "Score: " + std::to_string(data->data);
+        scoreText->setString(score);
+    }
+    
 }

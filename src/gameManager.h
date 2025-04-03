@@ -4,6 +4,7 @@
 #include "player.h"
 #include "enemy.h"
 #include "enemySpawner.h"
+#include "eventListener.h"
 
 class AssetManager;
 
@@ -16,13 +17,11 @@ enum class GameStates
     GameOver
 };
 
-class EventManager;
-
-class GameManager : public sf::Drawable
+class GameManager : public sf::Drawable, public EventListener
 {
 
 public:
-    GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<EventManager> inEventManager, std::shared_ptr<sf::RenderWindow> inWindow);
+    GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void inputUpdate(const sf::Event::TextEntered* input);
     void update(const sf::Time& deltaTime);
@@ -31,6 +30,9 @@ public:
     static const GameStates& GetGameState();
     static const GameStates& GetPreviousGameState();
     static void SetGameState(const GameStates& newState);
+
+    void Update(void* inData) override;
+
 private:
     std::unique_ptr<EnemySpawner> enemySpawner                  {nullptr};
     std::shared_ptr<Player> playerChar                          {nullptr};

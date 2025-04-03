@@ -8,13 +8,13 @@
 #include "gameManager.h"
 #include "eventManager.h"
 
-UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<EventManager> eventManager, std::shared_ptr<sf::RenderWindow> window)
+UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window)
 {
     mainMenu = std::make_shared<MainMenu>(*assetManager->gameFont, window);
     pauseMenu = std::make_shared<PauseMenu>(*assetManager->gameFont, window);
     optionsMenu = std::make_shared<OptionsMenu>(assetManager, window);
     gameOverWidget = std::make_shared<GameOverWidget>(*assetManager->gameFont, window);
-    playerHUD = std::make_shared<PlayerHUD>(*assetManager->gameFont, window, eventManager);
+    playerHUD = std::make_shared<PlayerHUD>(*assetManager->gameFont, window);
 }
 
 void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const

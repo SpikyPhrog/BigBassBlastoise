@@ -51,7 +51,7 @@ void HorizontalBox::SetPosition(const sf::Vector2f & newPosition)
 
         for (auto child : children)
         {
-            lastElementPos.y = hbShape->getPosition().y - child->GetSize().y / 2;
+            lastElementPos.y = hbShape->getPosition().y + child->GetSize().y;
             lastElementPos.x = hbShape->getPosition().x + element_size + elementPadding;
             child->SetPosition(lastElementPos);
             element_size = child->GetSize().x;

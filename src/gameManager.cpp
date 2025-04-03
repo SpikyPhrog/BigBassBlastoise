@@ -6,7 +6,7 @@
 GameStates GameManager::gameState = GameStates::MainMenu;
 GameStates GameManager::previousGameState = GameStates::MainMenu;
 
-GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<EventManager> inEventManager, std::shared_ptr<sf::RenderWindow> inWindow)
+GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow)
 {
     float windowWidth = inWindow->getSize().x;
     float windowHeight = inWindow->getSize().y;
@@ -15,12 +15,12 @@ GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shar
     
     playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager->gameFont);
     gameState = GameStates::MainMenu;
-    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar, inEventManager);
+    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar);
 }
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-    if (gameState == GameStates::Start)
+    if (GetGameState() == GameStates::Start)
     {
         target.draw(*enemySpawner);
         target.draw(*playerChar);
@@ -29,7 +29,7 @@ void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 
 void GameManager::inputUpdate(const sf::Event::TextEntered* input)
 {
-    // checking the lower letter would be:
+    // checking the lower letter would be
     // if(input->unicode < 90)
     // char += 32 => would return lowercase letter
     if (!input || gameState != GameStates::Start)
@@ -79,4 +79,17 @@ void GameManager::SetGameState(const GameStates & newState)
     gameState = newState;
 
     previousGameState = tempPrevState;
+}
+
+void GameManager::Update(void *inData)
+{
+    switch (gameState)
+    {
+    case GameStates::GameOver:
+        enemySpawner->Reset();
+        break;
+    case GameStates::Start:
+        enemySpawner->Start();
+        break;
+    }
 }
