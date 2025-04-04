@@ -2,7 +2,6 @@
 #include "stdafx.h"
 #include <unordered_map>
 #include "consts.h"
-#include "eventStructs.h"
 
 class EventListener;
 

@@ -10,7 +10,7 @@ int main(int argc, char** argv)
    
     std::shared_ptr<AssetManager> assetManager = std::make_shared<AssetManager>(argv);
 
-    // assetManager->mainMusic->play();
+    assetManager->mainMusic->play();
 
     std::shared_ptr<EventManager> eventManager = std::make_shared<EventManager>();
     std::shared_ptr<GameManager> gameManager = std::make_shared<GameManager>(assetManager, window);

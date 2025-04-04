@@ -1,14 +1,17 @@
 #include "settingSliderOptionWidget.h"
 #include "textWidget.h"
 #include "horizontalBox.h"
-#include "slider.h"
+#include "audioSlider.h"
 #include "../assetManager.h"
+#include "../eventManager.h"
 
 SettingSliderOptionWidget::SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
 {
     label = std::make_shared<TextWidget>(*assetManager->gameFont, inLabelText, window);
-    slider = std::make_shared<Slider>(window);
+    slider = std::make_shared<AudioSlider>(window);
+
+    EventManager::GetInstance()->Add(EventTypes::UI_Slider, slider);
 
     settings = hbSettings;
 
@@ -50,4 +53,9 @@ void SettingSliderOptionWidget::SetSliderValue(const float &inValue)
     assert(slider != nullptr);
 
     slider->SetValue(inValue);
+}
+
+void SettingSliderOptionWidget::SetSliderAudio(std::shared_ptr<sf::Music> inAudio)
+{
+    slider->SetMusic(inAudio);
 }

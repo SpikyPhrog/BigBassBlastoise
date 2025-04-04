@@ -15,12 +15,11 @@ public:
 
     const float& GetValue() { return value; }
     void SetValue(const float& inValue);
-
+    
 private:
     void AlignKnobPosition();
 
-
-private:
+protected:
     std::shared_ptr<sf::RectangleShape> sliderLine;
     std::shared_ptr<sf::CircleShape> sliderKnob;
 

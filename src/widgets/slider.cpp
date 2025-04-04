@@ -1,5 +1,6 @@
 #include "slider.h"
 #include "../math.h"
+#include "../eventManager.h"
 
 Slider::Slider(std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -59,14 +60,14 @@ void Slider::update()
             sliderKnob->setFillColor(ClickedColor);
             result = Maths::Clamp((float)mousePosition.x, startPoint.x, endPoint.x);
             value = Maths::Normalise(result, startPoint.x, endPoint.x);
-            sliderKnob->setPosition(sf::Vector2f(result, knobPosition.y));
+            // sliderKnob->setPosition(sf::Vector2f(result, knobPosition.y));
+            SetValue(value);
         }
     }
     else
     {
         sliderKnob->setFillColor(NormalColor);
     }
-    
 }
 
 void Slider::AlignKnobPosition()
@@ -83,4 +84,13 @@ void Slider::SetValue(const float &inValue)
     float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y / 2);
     float knobPosX = (inValue * (endPoint.x - startPoint.x)) + startPoint.x;
     sliderKnob->setPosition(sf::Vector2f(knobPosX, knobPosY));
+
+    UI_Slider_Data data;
+    data.data = inValue;
+
+    void* dataPtr = &data;
+
+    EventManager::GetInstance()->Broadcast(EventTypes::UI_Slider, dataPtr);
+
+    dataPtr = nullptr;
 }

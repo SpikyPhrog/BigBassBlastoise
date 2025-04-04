@@ -1,9 +1,10 @@
 #pragma once
 #include "baseWidget.h"
 #include "horizontalBox.h"
+#include "SFML/Audio.hpp"
 
 class TextWidget;
-class Slider;
+class AudioSlider;
 class AssetManager;
 
 
@@ -19,9 +20,10 @@ public:
     const sf::Vector2f& GetSize() override;
     void SetSliderValue(const float& inValue);
     
+    void SetSliderAudio(std::shared_ptr<sf::Music> inAudio);
 private:
     HBData settings; 
-    std::shared_ptr<Slider> slider                              {nullptr};
+    std::shared_ptr<AudioSlider> slider                         {nullptr};
     std::shared_ptr<TextWidget> label                           {nullptr};
     std::unique_ptr<HorizontalBox> optionsHB                    {nullptr};
 };
