@@ -14,7 +14,6 @@ public:
 
 private:
     void SetDefaultValues();
-    void CreateFile();
     void DeserializeFile();
 
     std::unordered_map<Configs, std::string> cfgs               {};

@@ -4,7 +4,6 @@
 
 Config::Config()
 {
-    CreateFile();
     SetDefaultValues();
     DeserializeFile();
 }
@@ -25,30 +24,14 @@ const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &Confi
 
 void Config::SetDefaultValues()
 {
-    std::string defaults = "MasterVolume=0.1f;\nName=Jeff;\n";    
-
     std::ofstream cfg (configFilePath);
     if (cfg.bad())
     {
         std::cerr << "config file not found\n";
     }
     
+    cfg<<defaultConfigs;
 
-    cfg<<defaults;
-
-    cfg.close();
-}
-
-void Config::CreateFile()
-{
-    std::ofstream cfg (configFilePath);
-
-    if (cfg.bad())
-    {
-        std::cerr << " FAILURE, DID NOT CREATE CONFIG FILE\n"; 
-        return;
-    }
-    
     cfg.close();
 }
 
