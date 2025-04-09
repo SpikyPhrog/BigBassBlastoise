@@ -5,6 +5,7 @@
 #include "horizontalBox.h"
 #include "../assetManager.h"
 #include "../gameManager.h"
+#include "../eventManager.h"
 
 OptionsMenu::OptionsMenu(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> window): 
 BaseWidget(window)
@@ -25,7 +26,9 @@ BaseWidget(window)
     musicSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Master Volume", hbSettings, window);
     musicSliderOption->SetSliderAudio(assetManager->mainMusic);
 
-    musicSliderOption->SetSliderValue(.6f);
+    std::string masterVolumeValue = EventManager::GetInstance()->config->GetConfig(Configs::MasterVolume);
+
+    musicSliderOption->SetSliderValue(std::stof(masterVolumeValue));
 
     testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window);
 

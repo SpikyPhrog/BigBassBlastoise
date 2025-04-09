@@ -42,7 +42,6 @@ void TextWidget::update()
 void TextWidget::SetPosition(const sf::Vector2f & newPosition)
 {
     assert(text != nullptr);
-    // printf("Current text position: %f \t %f, new position; %f \t %f \n", text->getPosition().x, text->getPosition().y, newPosition.x, newPosition.y);
     text->setPosition(newPosition);
 }
 

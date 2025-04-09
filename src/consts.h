@@ -18,6 +18,7 @@ constexpr sf::Time timeBetweenWaves                             {sf::seconds(3.f
 constexpr const char* fontFilePath                              {"assets/fonts/SalmonFont.otf"}; 
 constexpr const char* musicFilePath                             {"assets/music/BMB.mp3"}; 
 constexpr const char* dictionaryFilePath                        {"assets/dict/dictionary.txt"};
+constexpr const char* configFilePath                            {"conf.cfg"};
 
 struct HBData
 {
@@ -43,3 +44,8 @@ enum class EventTypes
     GS_Start,
 };
 
+enum class Configs
+{
+    MasterVolume,
+    Name,
+};

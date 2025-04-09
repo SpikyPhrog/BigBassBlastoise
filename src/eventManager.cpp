@@ -3,6 +3,11 @@
 
 std::shared_ptr<EventManager> EventManager::eventManager_ = nullptr;
 
+EventManager::EventManager()
+{
+    config = std::make_unique<Config>();
+}
+
 std::shared_ptr<EventManager> EventManager::GetInstance()
 {
     if(eventManager_ == nullptr)

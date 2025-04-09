@@ -50,12 +50,19 @@ const sf::Vector2f & SettingSliderOptionWidget::GetSize()
 
 void SettingSliderOptionWidget::SetSliderValue(const float &inValue)
 {
-    assert(slider != nullptr);
-
+    if (!slider)
+    {
+        return;
+    }
+    
     slider->SetValue(inValue);
 }
 
 void SettingSliderOptionWidget::SetSliderAudio(std::shared_ptr<sf::Music> inAudio)
 {
+    if (!slider)
+    {
+        return;
+    }
     slider->SetMusic(inAudio);
 }
