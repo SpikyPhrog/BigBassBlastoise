@@ -1,8 +1,8 @@
 #pragma once
-#include "baseWidget.h"
+#include "menuWidget.h"
 #include "../eventListener.h"
 
-class Slider : public BaseWidget, public EventListener
+class Slider : public MenuWidget, public EventListener
 {
 public:
     Slider(std::shared_ptr<sf::RenderWindow> window);

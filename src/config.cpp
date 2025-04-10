@@ -4,13 +4,14 @@
 
 Config::Config()
 {
+    CheckConfigFileExists();
     SetDefaultValues();
     DeserializeFile();
 }
 
 Config::~Config()
 {
-    std::ofstream cfg(configFilePath);
+    std::ifstream cfg(configFilePath);
     if (cfg.is_open())
     {
         cfg.close();
@@ -24,6 +25,12 @@ const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &Confi
 
 void Config::SetDefaultValues()
 {
+    if (bFileExists)
+    {
+        return;
+    }
+    
+
     std::ofstream cfg (configFilePath);
     if (cfg.bad())
     {
@@ -40,7 +47,7 @@ void Config::DeserializeFile()
     std::ifstream cfg (configFilePath);
     char c;
 
-    if (cfg.bad())
+    if (!cfg.is_open())
     {
         std::cerr<< "DESERIALIZER File not found\n";
         return;
@@ -50,7 +57,7 @@ void Config::DeserializeFile()
     int enumIndex = 0;
     bool bWriteWord = false;
 
-    while (cfg)
+    while (cfg.good())
     {
         cfg.get(c);
         
@@ -69,7 +76,6 @@ void Config::DeserializeFile()
             cfgs.try_emplace((Configs)enumIndex, word);
             enumIndex++;
             bWriteWord = false;
-            printf("word : %s\n", word.c_str());
             word = "";
         }
         
@@ -78,6 +84,15 @@ void Config::DeserializeFile()
             word+= c;
         }
     }
+    
+    cfg.close();
+}
+
+void Config::CheckConfigFileExists()
+{
+    std::ifstream cfg (configFilePath);
+
+    bFileExists = cfg.good();
     
     cfg.close();
 }

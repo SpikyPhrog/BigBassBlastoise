@@ -9,7 +9,7 @@ class AssetManager;
 class OptionsMenu : public BaseWidget
 {
 public:
-    OptionsMenu(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> window);
+    OptionsMenu(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     
@@ -20,12 +20,10 @@ public:
 
 private:
     void OnClickedBack();
-    void OnVolumeSliderUpdate(const float& inValue);
 
 private:
     std::unique_ptr<VerticalBox> buttonVB                       {nullptr};
     std::shared_ptr<Button> backButton                          {nullptr};
     std::shared_ptr<SettingSliderOptionWidget> musicSliderOption{nullptr};
     std::shared_ptr<SettingSliderOptionWidget> testSliderOption {nullptr};
-    std::shared_ptr<AssetManager> assetManager                  {nullptr};
 };

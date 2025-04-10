@@ -15,6 +15,9 @@ public:
 private:
     void SetDefaultValues();
     void DeserializeFile();
+    void CheckConfigFileExists();
+
+    bool bFileExists                                            {false};
 
     std::unordered_map<Configs, std::string> cfgs               {};
 };

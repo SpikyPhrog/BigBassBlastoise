@@ -3,7 +3,7 @@
 #include "../eventManager.h"
 
 Slider::Slider(std::shared_ptr<sf::RenderWindow> window):
-BaseWidget(window)
+MenuWidget(window)
 {
     sliderLine = std::make_shared<sf::RectangleShape>(sf::Vector2f{120.f, 25.f});
     sliderKnob = std::make_shared<sf::CircleShape>(15);

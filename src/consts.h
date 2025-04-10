@@ -19,7 +19,10 @@ constexpr const char* fontFilePath                              {"assets/fonts/S
 constexpr const char* musicFilePath                             {"assets/music/BMB.mp3"}; 
 constexpr const char* dictionaryFilePath                        {"assets/dict/dictionary.txt"};
 constexpr const char* configFilePath                            {"conf.cfg"};
-constexpr const char* defaultConfigs                            {"MasterVolume=0.1f;\nName=Jeff;\n"};
+constexpr const char* defaultConfigs                            {
+                                                                "MasterVolume=.1f;\n"
+                                                                "Name=Jeff;\n"
+                                                                };
 
 struct HBData
 {
