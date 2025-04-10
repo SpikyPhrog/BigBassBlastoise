@@ -21,6 +21,7 @@ public:
     void SetSliderValue(const float& inValue);
     
     void SetSliderAudio(std::shared_ptr<sf::Music> inAudio);
+    void SetSliderName(const std::string& newName);
 private:
     HBData settings; 
     std::shared_ptr<AudioSlider> slider                         {nullptr};

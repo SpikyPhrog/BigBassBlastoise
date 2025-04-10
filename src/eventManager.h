@@ -22,9 +22,10 @@ public:
     void Remove(const EventTypes& eventType, std::shared_ptr<EventListener> listenerToRemove);
 
     void Broadcast(const EventTypes& eventType, void* data);
+    void Broadcast(const EventTypes& eventType, void* data, std::shared_ptr<EventListener> listener);
 
     std::unique_ptr<Config> config                              {nullptr};
 
 private:
-    std::unordered_map<EventTypes, std::shared_ptr<EventListener>> listeners;
+    std::unordered_map<std::shared_ptr<EventListener>, EventTypes> listeners;
 };

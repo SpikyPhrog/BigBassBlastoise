@@ -16,12 +16,21 @@ public:
     const float& GetValue() { return value; }
     void SetValue(const float& inValue);
     
+    const std::string& GetName();
+    void SetName(const std::string& newName);
+    const std::shared_ptr<Slider>& Get();
+    void SetSelf (std::shared_ptr<Slider> newSelf);
+    
 private:
     void AlignKnobPosition();
+
+    std::string name {"Base slider class"};
 
 protected:
     std::shared_ptr<sf::RectangleShape> sliderLine;
     std::shared_ptr<sf::CircleShape> sliderKnob;
+
+    std::shared_ptr<Slider> self                                {nullptr};
 
     bool bIsClicked                                             {false};
     float value                                                 {0.f};

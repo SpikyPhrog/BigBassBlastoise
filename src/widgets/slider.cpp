@@ -11,9 +11,6 @@ BaseWidget(window)
     sliderKnob->setFillColor(sf::Color::Red);
     float knobRadius = sliderKnob->getRadius();
     sliderKnob->setOrigin(sf::Vector2f(knobRadius, knobRadius));
-
-    SetPosition(sf::Vector2f{0.f, 0.f});
-    SetValue(1);
 }
 
 void Slider::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -29,8 +26,6 @@ void Slider::SetPosition(const sf::Vector2f & newPosition)
     
     startPoint.x = sliderLine->getPosition().x;
     endPoint.x = sliderLine->getPosition().x + sliderLine->getSize().x;
-
-    SetValue(value);
 }
 
 const sf::Vector2f& Slider::GetPosition()
@@ -70,12 +65,23 @@ void Slider::update()
     }
 }
 
+const std::string &Slider::GetName()
+{
+    return name;
+}
+
+void Slider::SetName(const std::string &newName)
+{
+    name = newName;
+}
+
 void Slider::AlignKnobPosition()
 {
     float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y * .5f);
     float knobPosX = sliderLine->getPosition().x + sliderKnob->getRadius() * .5f;
 
     sliderKnob->setPosition(sf::Vector2f(knobPosX, knobPosY));
+    SetValue(value);
 }
 
 void Slider::SetValue(const float &inValue)
@@ -90,7 +96,17 @@ void Slider::SetValue(const float &inValue)
 
     void* dataPtr = &data;
 
-    EventManager::GetInstance()->Broadcast(EventTypes::UI_Slider, dataPtr);
+    EventManager::GetInstance()->Broadcast(EventTypes::UI_Slider, dataPtr, Get());
 
     dataPtr = nullptr;
+}
+
+const std::shared_ptr<Slider>& Slider::Get()
+{
+    return self;
+}
+
+void Slider::SetSelf(std::shared_ptr<Slider> newSelf)
+{
+    self = newSelf;
 }

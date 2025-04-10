@@ -20,7 +20,7 @@ std::shared_ptr<EventManager> EventManager::GetInstance()
 
 void EventManager::Add(const EventTypes &eventType, std::shared_ptr<EventListener> listener)
 {
-    listeners.insert({eventType, listener});
+    listeners.try_emplace(listener, eventType);
 }
 
 void EventManager::Remove(const EventTypes &eventType, std::shared_ptr<EventListener> listenerToRemove)
@@ -29,7 +29,7 @@ void EventManager::Remove(const EventTypes &eventType, std::shared_ptr<EventList
     {
         for(auto it = listeners.begin(); it != listeners.end();)
         {
-            if (it->second == listenerToRemove)
+            if (it->first == listenerToRemove)
             {
                 it = listeners.erase(it);
             }
@@ -43,11 +43,24 @@ void EventManager::Broadcast(const EventTypes &eventType, void* data)
     {
         for (auto it = listeners.begin(); it != listeners.end(); ++it)
         {
-            if (it->first == eventType)
+            if (it->second == eventType)
             {
-                it->second->Update(data);
+                it->first->Update(data);
             }
         }
     }
 }
- 
+
+void EventManager::Broadcast(const EventTypes &eventType, void *data, std::shared_ptr<EventListener> listener)
+{
+    if(listeners.size() > 0 )
+    {
+        for (auto it = listeners.begin(); it != listeners.end(); ++it)
+        {
+            if (it->second == eventType && it->first == listener)
+            {
+                it->first->Update(data);
+            }
+        }
+    }
+}

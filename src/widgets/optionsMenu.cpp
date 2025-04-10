@@ -27,7 +27,6 @@ BaseWidget(window)
     musicSliderOption->SetSliderAudio(assetManager->mainMusic);
 
     std::string masterVolumeValue = EventManager::GetInstance()->config->GetConfig(Configs::MasterVolume);
-
     musicSliderOption->SetSliderValue(std::stof(masterVolumeValue));
 
     testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window);

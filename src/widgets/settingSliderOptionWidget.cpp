@@ -10,6 +10,8 @@ BaseWidget(window)
 {
     label = std::make_shared<TextWidget>(*assetManager->gameFont, inLabelText, window);
     slider = std::make_shared<AudioSlider>(window);
+    slider->SetSelf(slider);
+    SetSliderName(inLabelText);
 
     EventManager::GetInstance()->Add(EventTypes::UI_Slider, slider);
 
@@ -65,4 +67,13 @@ void SettingSliderOptionWidget::SetSliderAudio(std::shared_ptr<sf::Music> inAudi
         return;
     }
     slider->SetMusic(inAudio);
+}
+
+void SettingSliderOptionWidget::SetSliderName(const std::string &newName)
+{
+    if (!slider)
+    {
+        return;
+    }
+    slider->SetName(newName);
 }

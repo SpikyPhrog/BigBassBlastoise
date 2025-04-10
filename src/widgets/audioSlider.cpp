@@ -41,7 +41,9 @@ void AudioSlider::Update(void *inData)
     
     if (data != nullptr && music != nullptr)
     {   
-        music->setVolume(data->data * 100);
+        float volume = data->data * 100;
+        printf("%s \t %f\n", GetName().c_str(), volume);
+        music->setVolume(volume);
     }
 }
 

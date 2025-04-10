@@ -39,3 +39,4 @@ user.bazelrc
 /src/assets/music/
 /src/assets/dict/
 !/src/assets/BUILD
+*.cfg
