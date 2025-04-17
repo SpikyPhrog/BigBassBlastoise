@@ -47,9 +47,3 @@ enum class EventTypes
     GS_GameOver,
     GS_Start,
 };
-
-enum class Configs
-{
-    MasterVolume,
-    Name,
-};

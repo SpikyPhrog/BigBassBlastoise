@@ -1,6 +1,7 @@
 #pragma once
 #include "menuWidget.h"
 #include "../eventListener.h"
+#include "../configs.h"
 
 class Slider : public MenuWidget, public EventListener
 {
@@ -20,15 +21,16 @@ public:
     void SetName(const std::string& newName);
     const std::shared_ptr<Slider>& Get();
     void SetSelf (std::shared_ptr<Slider> newSelf);
-    
+    void SetConfigSetting(const Configs& newConf);
+
 private:
     void AlignKnobPosition();
 
     std::string name {"Base slider class"};
 
 protected:
-    std::shared_ptr<sf::RectangleShape> sliderLine;
-    std::shared_ptr<sf::CircleShape> sliderKnob;
+    std::shared_ptr<sf::RectangleShape> sliderLine              {nullptr};
+    std::shared_ptr<sf::CircleShape> sliderKnob                 {nullptr};
 
     std::shared_ptr<Slider> self                                {nullptr};
 
@@ -39,4 +41,8 @@ protected:
     sf::Color HoveredColor                                      {sf::Color::Green};
     sf::Color NormalColor                                       {sf::Color::Red};
     sf::Color ClickedColor                                      {sf::Color::Cyan};
+
+    // ODDLY SPECIFIC, might need to be removed if this is to be abstracted
+
+    Configs configSetting                                       {Configs::None};
 };

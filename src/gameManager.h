@@ -14,7 +14,8 @@ enum class GameStates
     Options,
     Start,
     Paused,
-    GameOver
+    GameOver,
+    PromptSettings
 };
 
 class GameManager : public sf::Drawable, public EventListener
@@ -30,6 +31,7 @@ public:
     static const GameStates& GetGameState();
     static const GameStates& GetPreviousGameState();
     static void SetGameState(const GameStates& newState);
+    static void SetGameStateToPrompt();
 
     void Update(void* inData) override;
 

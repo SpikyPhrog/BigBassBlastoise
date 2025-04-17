@@ -93,3 +93,8 @@ void GameManager::Update(void *inData)
         break;
     }
 }
+
+void GameManager::SetGameStateToPrompt()
+{
+    gameState = GameStates::PromptSettings;
+}

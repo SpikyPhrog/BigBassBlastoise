@@ -1,6 +1,7 @@
 #include "config.h"
 #include <fstream>
 #include <string>
+#include "consts.h"
 
 Config::Config()
 {
@@ -23,8 +24,42 @@ const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &Confi
     return cfgs.at(conf);
 }
 
-void Config::SetDefaultValues()
+void Config::RevertChanges()
 {
+    SetDefaultValues(true);
+    updatedCfgs.clear();
+}
+
+void Config::SaveChanges()
+{
+    SerialiseConfigs();
+}
+
+void Config::UpdateConfig(const Configs &cfg, const std::string &newSetting)
+{
+    if (auto configSearch = updatedCfgs.find(cfg); configSearch != updatedCfgs.end())
+    {
+        configSearch->second = newSetting;
+    }
+    else
+    {
+        updatedCfgs.try_emplace(cfg, newSetting);
+    }
+}
+
+bool Config::GetAnyChangesMade()
+{
+    return updatedCfgs.size() > 0;
+}
+
+void Config::SetDefaultValues(bool bForce)
+{
+    if (bForce)
+    {
+        bFileExists = false;
+    }
+    
+
     if (bFileExists)
     {
         return;
@@ -40,6 +75,12 @@ void Config::SetDefaultValues()
     cfg<<defaultConfigs;
 
     cfg.close();
+
+    if (bForce)
+    {
+        bFileExists = true;
+    }
+    
 }
 
 void Config::DeserializeFile()
@@ -95,4 +136,29 @@ void Config::CheckConfigFileExists()
     bFileExists = cfg.good();
     
     cfg.close();
+}
+
+void Config::SerialiseConfigs()
+{
+    for (auto updatedCfg : updatedCfgs)
+    {
+        if (auto changedConfig = cfgs.find(updatedCfg.first); changedConfig != cfgs.end())
+        {
+            changedConfig->second = updatedCfg.second;
+        }
+    }
+
+    std::ofstream cfgFile (configFilePath);
+    if (cfgFile.bad())
+    {
+        std::cerr << "config file not found\n";
+    }
+    
+    for (auto config : cfgs)
+    {
+        std::string Key = GetStringConfigs(config.first);
+        cfgFile << Key << "=" << config.second << ";\n";
+    }    
+
+    cfgFile.close();
 }

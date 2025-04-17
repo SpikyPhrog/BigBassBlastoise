@@ -110,3 +110,8 @@ void Slider::SetSelf(std::shared_ptr<Slider> newSelf)
 {
     self = newSelf;
 }
+
+void Slider::SetConfigSetting(const Configs &newConf)
+{
+    configSetting = newConf;
+}

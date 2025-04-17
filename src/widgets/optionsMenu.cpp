@@ -22,6 +22,7 @@ BaseWidget(window)
     hbSettings.size = sf::Vector2f(400.f, 75.f);
 
     musicSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Master Volume", hbSettings, window);
+    musicSliderOption->SetSliderConfig(Configs::MasterVolume);
     musicSliderOption->SetSliderAudio(assetManager->mainMusic);
 
     std::string masterVolumeValue = EventManager::GetInstance()->config->GetConfig(Configs::MasterVolume);
@@ -48,13 +49,11 @@ void OptionsMenu::SetPosition(const sf::Vector2f & newPosition)
 
 const sf::Vector2f & OptionsMenu::GetPosition()
 {
-// TODO: insert return statement here
     return sf::Vector2f(0.f, 0.f);
 }
 
 const sf::Vector2f & OptionsMenu::GetSize()
 {
-// TODO: insert return statement here
     return sf::Vector2f(0.f, 0.f);
 }
 
@@ -68,5 +67,9 @@ void OptionsMenu::update()
 
 void OptionsMenu::OnClickedBack()
 {
-    GameManager::SetGameState(GameManager::GetPreviousGameState());
+    // Check for unsaved changes
+    if(EventManager::GetInstance()->config->GetAnyChangesMade())
+    {
+        GameManager::SetGameStateToPrompt();
+    }
 }

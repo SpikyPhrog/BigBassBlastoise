@@ -77,3 +77,13 @@ void SettingSliderOptionWidget::SetSliderName(const std::string &newName)
     }
     slider->SetName(newName);
 }
+
+void SettingSliderOptionWidget::SetSliderConfig(const Configs &conf)
+{
+    if (!slider)
+    {
+        return;
+    }
+
+    slider->SetConfigSetting(conf);    
+}

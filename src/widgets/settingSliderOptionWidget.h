@@ -2,6 +2,7 @@
 #include "baseWidget.h"
 #include "horizontalBox.h"
 #include "SFML/Audio.hpp"
+#include "../configs.h"
 
 class TextWidget;
 class AudioSlider;
@@ -22,6 +23,7 @@ public:
     
     void SetSliderAudio(std::shared_ptr<sf::Music> inAudio);
     void SetSliderName(const std::string& newName);
+    void SetSliderConfig(const Configs& conf);
 private:
     HBData settings; 
     std::shared_ptr<AudioSlider> slider                         {nullptr};
