@@ -1,21 +1,8 @@
 #include "eventManager.h"
 #include "eventListener.h"
 
-std::shared_ptr<EventManager> EventManager::eventManager_ = nullptr;
-
 EventManager::EventManager()
 {
-    config = std::make_unique<Config>();
-}
-
-std::shared_ptr<EventManager> EventManager::GetInstance()
-{
-    if(eventManager_ == nullptr)
-    {
-        eventManager_ = std::make_shared<EventManager>();
-    }
-
-    return eventManager_;
 }
 
 void EventManager::Add(const EventTypes &eventType, std::shared_ptr<EventListener> listener)

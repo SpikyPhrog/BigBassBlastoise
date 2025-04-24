@@ -1,6 +1,7 @@
 #include "audioSlider.h"
 #include "../eventStructs.h"
-#include "../eventManager.h"
+#include "../system.h"
+#include "../logger.h"
 
 AudioSlider::AudioSlider(std::shared_ptr<sf::RenderWindow> window):
 Slider(window)
@@ -43,9 +44,10 @@ void AudioSlider::Update(void *inData)
     if (data != nullptr && music != nullptr)
     {   
         float volume = data->data * 100;
-        printf("%s \t %f\n", GetName().c_str(), volume);
-        
-        EventManager::GetInstance()->config->UpdateConfig(configSetting, std::to_string(data->data));
+
+        Logger::Log(LoggerLevel::DEBUG, "sf",GetName().c_str(), volume);
+
+        System::Get()->config->UpdateConfig(configSetting, std::to_string(data->data));
 
         music->setVolume(volume);
     }

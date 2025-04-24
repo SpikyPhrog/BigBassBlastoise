@@ -1,6 +1,6 @@
 #include "slider.h"
 #include "../math.h"
-#include "../eventManager.h"
+#include "../system.h"
 
 Slider::Slider(std::shared_ptr<sf::RenderWindow> window):
 MenuWidget(window)
@@ -96,7 +96,7 @@ void Slider::SetValue(const float &inValue)
 
     void* dataPtr = &data;
 
-    EventManager::GetInstance()->Broadcast(EventTypes::UI_Slider, dataPtr, Get());
+    System::Get()->BroadcastEvent(EventTypes::UI_Slider, dataPtr, Get());
 
     dataPtr = nullptr;
 }

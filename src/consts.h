@@ -20,7 +20,7 @@ constexpr const char* musicFilePath                             {"assets/music/B
 constexpr const char* dictionaryFilePath                        {"assets/dict/dictionary.txt"};
 constexpr const char* configFilePath                            {"conf.cfg"};
 constexpr const char* defaultConfigs                            {
-                                                                "MasterVolume=.1f;\n"
+                                                                "MasterVolume=1f;\n"
                                                                 "Name=Jeff;\n"
                                                                 };
 

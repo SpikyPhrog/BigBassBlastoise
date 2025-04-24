@@ -1,8 +1,7 @@
 #include "enemySpawner.h"
 #include <random>
 #include "consts.h"
-#include "eventManager.h"
-#include "statManager.h"
+#include "system.h"
 
 std::random_device dev;
 std::mt19937 rng(dev());
@@ -72,11 +71,11 @@ void EnemySpawner::ProcessInput(const char & input)
         if (currentEnemy->GetIsCompleted())
         {
             UI_Data data;
-            data.data = StatManager::UpdateScoring(currentEnemy->GetRewardDrop());
+            data.data = System::Get()->statManager->UpdateScoring(currentEnemy->GetRewardDrop());
 
             void* dataPtr = &data;
 
-            EventManager::GetInstance()->Broadcast(EventTypes::UI_SCORE, dataPtr);  
+            System::Get()->BroadcastEvent(EventTypes::UI_SCORE, dataPtr);  
             DestroyEnemy();
 
             dataPtr = nullptr;
@@ -104,11 +103,11 @@ void EnemySpawner::DamagePlayer(std::shared_ptr<Enemy> enemy)
     currentEnemy = enemy;
 
     UI_Data data;
-    data.data = StatManager::UpdateHealth(-1);
+    data.data = System::Get()->statManager->UpdateHealth(-1);
 
     void* dataPtr = &data;
 
-    EventManager::GetInstance()->Broadcast(EventTypes::UI_LIVES, dataPtr);  
+    System::Get()->BroadcastEvent(EventTypes::UI_LIVES, dataPtr);  
 
     DestroyEnemy();
 

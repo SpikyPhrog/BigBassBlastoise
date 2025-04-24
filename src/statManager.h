@@ -6,11 +6,11 @@ class StatManager
 public:
     StatManager();
 
-    static int UpdateScoring(const int& modifier);
-    static int UpdateHealth(const int& modifier);
+    int UpdateScoring(const int& modifier);
+    int UpdateHealth(const int& modifier);
 
 private:
-    static int lives;
-    static int score;
+    int lives                                                   {3};
+    int score                                                   {0};
     int multiplier                                              {1};
 };

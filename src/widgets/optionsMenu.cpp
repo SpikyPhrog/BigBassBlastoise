@@ -5,7 +5,7 @@
 #include "horizontalBox.h"
 #include "../assetManager.h"
 #include "../gameManager.h"
-#include "../eventManager.h"
+#include "../system.h"
 
 OptionsMenu::OptionsMenu(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window): 
 BaseWidget(window)
@@ -25,7 +25,7 @@ BaseWidget(window)
     musicSliderOption->SetSliderConfig(Configs::MasterVolume);
     musicSliderOption->SetSliderAudio(assetManager->mainMusic);
 
-    std::string masterVolumeValue = EventManager::GetInstance()->config->GetConfig(Configs::MasterVolume);
+    std::string masterVolumeValue = System::Get()->config->GetConfig(Configs::MasterVolume);
     musicSliderOption->SetSliderValue(std::stof(masterVolumeValue));
 
     testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window);
@@ -68,7 +68,7 @@ void OptionsMenu::update()
 void OptionsMenu::OnClickedBack()
 {
     // Check for unsaved changes
-    if(EventManager::GetInstance()->config->GetAnyChangesMade())
+    if(System::Get()->config->GetAnyChangesMade())
     {
         GameManager::SetGameStateToPrompt();
     }

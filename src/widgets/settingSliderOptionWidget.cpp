@@ -3,7 +3,7 @@
 #include "horizontalBox.h"
 #include "audioSlider.h"
 #include "../assetManager.h"
-#include "../eventManager.h"
+#include "../system.h"
 
 SettingSliderOptionWidget::SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -13,7 +13,7 @@ BaseWidget(window)
     slider->SetSelf(slider);
     SetSliderName(inLabelText);
 
-    EventManager::GetInstance()->Add(EventTypes::UI_Slider, slider);
+    System::Get()->AddEvent(EventTypes::UI_Slider, slider);
 
     settings = hbSettings;
 

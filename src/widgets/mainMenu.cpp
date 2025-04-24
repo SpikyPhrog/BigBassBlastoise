@@ -1,6 +1,6 @@
 #include "mainMenu.h"
 #include "../gameManager.h"
-#include "../eventManager.h"
+#include "../system.h"
 
 MainMenu::MainMenu(const sf::Font& font, std::shared_ptr<sf::RenderWindow> window): 
 BaseWidget(window)
@@ -67,8 +67,8 @@ void MainMenu::OnPlayClicked()
 
     void* dataPtr = &data;
 
-    EventManager::GetInstance()->Broadcast(EventTypes::UI_LIVES, dataPtr);
-    EventManager::GetInstance()->Broadcast(EventTypes::GS_Start, NULL);
+    System::Get()->BroadcastEvent(EventTypes::UI_LIVES, dataPtr);
+    System::Get()->BroadcastEvent(EventTypes::GS_Start, NULL);
 
     dataPtr = nullptr;
 }

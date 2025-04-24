@@ -6,4 +6,6 @@
 
 #include "configs.h"         
 
+#include "loggerLevels.h"
+
 #undef GENERATE_ENUM_STRINGS   // Stop string generation

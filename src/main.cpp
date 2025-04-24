@@ -2,7 +2,7 @@
 #include "gameManager.h"
 #include "assetManager.h"
 #include "uiManager.h"
-#include "eventManager.h"
+#include "system.h"
 
 int main(int argc, char** argv)
 {
@@ -15,8 +15,8 @@ int main(int argc, char** argv)
     std::shared_ptr<GameManager> gameManager = std::make_shared<GameManager>(assetManager, window);
     std::unique_ptr<UIManager> uiManager = std::make_unique<UIManager>(assetManager, window);
 
-    EventManager::GetInstance()->Add(EventTypes::GS_GameOver, gameManager);
-    EventManager::GetInstance()->Add(EventTypes::GS_Start, gameManager);
+    System::Get()->AddEvent(EventTypes::GS_GameOver, gameManager);
+    System::Get()->AddEvent(EventTypes::GS_Start, gameManager);
 
     sf::Clock deltaClock;
 

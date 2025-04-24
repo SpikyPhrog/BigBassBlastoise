@@ -3,7 +3,7 @@
 #include "horizontalBox.h"
 #include "textWidget.h"
 #include "../assetManager.h"
-#include "../eventManager.h"
+#include "../system.h"
 #include "../gameManager.h"
 
 PromptWidget::PromptWidget(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window):
@@ -72,14 +72,14 @@ void PromptWidget::ClearState(bool &newState)
 
 void PromptWidget::OnConfirm()
 {
-    EventManager::GetInstance()->config->SaveChanges();
+    System::Get()->config->SaveChanges();
     
     GameManager::SetGameState(GameManager::GetPreviousGameState());
 }
 
 void PromptWidget::OnCancel()
 {
-    EventManager::GetInstance()->config->RevertChanges();
+    System::Get()->config->RevertChanges();
     
     GameManager::SetGameState(GameManager::GetPreviousGameState());
 }

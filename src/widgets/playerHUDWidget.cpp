@@ -3,7 +3,7 @@
 #include "../consts.h"
 #include "playerScoreWidget.h"
 #include "playerHealthWidget.h"
-#include "../eventManager.h"
+#include "../system.h"
 
 PlayerHUD::PlayerHUD(const sf::Font &font, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -11,8 +11,8 @@ BaseWidget(window)
     scoreWidget = std::make_shared<PlayerScoreWidget>(font, window);
     healthWidget = std::make_shared<PlayerHealthWidget>(font, window);
 
-    EventManager::GetInstance()->Add(EventTypes::UI_SCORE, scoreWidget);
-    EventManager::GetInstance()->Add(EventTypes::UI_LIVES, healthWidget);
+    System::Get()->AddEvent(EventTypes::UI_SCORE, scoreWidget);
+    System::Get()->AddEvent(EventTypes::UI_LIVES, healthWidget);
 }
 
 void PlayerHUD::draw(sf::RenderTarget &target, sf::RenderStates states) const

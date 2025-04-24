@@ -1,10 +1,8 @@
 #include "statManager.h"
 #include "gameManager.h"
-#include "eventManager.h"
 #include "consts.h"
+#include "system.h"
 
-int StatManager::lives = 3;
-int StatManager::score = 0;
 
 StatManager::StatManager()
 {
@@ -24,7 +22,7 @@ int StatManager::UpdateHealth(const int &modifier)
     if (lives <= 0)
     {
         GameManager::SetGameState(GameStates::GameOver);
-        EventManager::GetInstance()->Broadcast(EventTypes::GS_GameOver, NULL);
+        System::Get()->BroadcastEvent(EventTypes::GS_GameOver, NULL);
         return 0;
     }
     
