@@ -1,5 +1,0 @@
-[28/04/2025 19:19:43.512]CRITICAL:  window in main size :x 800
-[28/04/2025 19:19:43.564]DEBUG:  Window get size y:  600
-[28/04/2025 19:19:43.564]DEBUG:  Window get size x:  800
-[28/04/2025 19:19:43.564]DEBUG:  Window get size y:  300
-[28/04/2025 19:24:26.058]DEBUG:  HB pos:  0
