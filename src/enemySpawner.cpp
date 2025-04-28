@@ -2,6 +2,7 @@
 #include <random>
 #include "consts.h"
 #include "system.h"
+#include "logger.h"
 
 std::random_device dev;
 std::mt19937 rng(dev());
@@ -174,4 +175,5 @@ void EnemySpawner::Reset()
 void EnemySpawner::Start()
 {
     SpawnWave();
+    Logger::Log(LoggerLevel::DEBUG, "%s", "Spawning wave");
 }

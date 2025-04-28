@@ -4,6 +4,7 @@ VerticalBox::VerticalBox(const VBData& settings, std::shared_ptr<sf::RenderWindo
 BaseWidget(window)
 {
     vbShape = std::make_unique<sf::RectangleShape>(settings.size);
+    vbShape->setFillColor(sf::Color::Red);
     vbSettings = settings;
     SetPosition(settings.position);
     
@@ -77,7 +78,7 @@ void VerticalBox::SetChildrenPosition()
         for (auto child : children)
         {
             assert(child != nullptr);
-            lastElementPos.x = vbShape->getPosition().x - child->GetSize().x / 2;
+            lastElementPos.x = vbShape->getPosition().x;
             lastElementPos.y = vbShape->getPosition().y + lastChildPosY + element_size + elementPadding;
             child->SetPosition(lastElementPos);
             lastChildPosY = lastElementPos.y;

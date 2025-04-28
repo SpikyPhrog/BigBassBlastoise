@@ -3,6 +3,7 @@
 
 class Button;
 class HorizontalBox;
+class VerticalBox;
 class TextWidget;
 class AssetManager;
 
@@ -17,14 +18,16 @@ public:
     const sf::Vector2f& GetPosition() override;
     const sf::Vector2f& GetSize() override; 
     void update() override;
-    void ClearState(bool& newState);
     
+    void SetMessage(const std::string& msg);
+
 private:
     void OnConfirm();
     void OnCancel();
     
 private:    
-    std::unique_ptr<HorizontalBox> buttonHB                     {nullptr};
+    std::shared_ptr<HorizontalBox> buttonHB                     {nullptr};
+    std::unique_ptr<VerticalBox> promptVB                       {nullptr};
     std::shared_ptr<Button> confirmButton                       {nullptr};
     std::shared_ptr<Button> cancelButton                        {nullptr};
     std::shared_ptr<TextWidget> message                         {nullptr};

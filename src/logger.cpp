@@ -89,7 +89,7 @@ std::string Logger::getTimestamp()
         now.time_since_epoch()) % 1000;
     std::stringstream nowSs;
     nowSs
-        << std::put_time(std::localtime(&nowAsTimeT), "%d %m %Y %T")
+        << std::put_time(std::localtime(&nowAsTimeT), "%d/%m/%Y %T")
         << '.' << std::setfill('0') << std::setw(3) << nowMs.count();
     return nowSs.str();
     

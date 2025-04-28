@@ -36,7 +36,7 @@ public:
     void Update(void* inData) override;
 
 private:
-    std::unique_ptr<EnemySpawner> enemySpawner                  {nullptr};
+    std::shared_ptr<EnemySpawner> enemySpawner                  {nullptr};
     std::shared_ptr<Player> playerChar                          {nullptr};
 
     static GameStates gameState;

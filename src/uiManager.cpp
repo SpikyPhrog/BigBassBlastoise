@@ -17,6 +17,7 @@ UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr
     gameOverWidget = std::make_shared<GameOverWidget>(*assetManager->gameFont, window);
     playerHUD = std::make_shared<PlayerHUD>(*assetManager->gameFont, window);    
     promptWidget = std::make_unique<PromptWidget>(assetManager, window);
+    promptWidget->SetMessage("There are unsaved changes, do you want to save them?");
 }
 
 void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const

@@ -7,7 +7,7 @@ EventManager::EventManager()
 
 void EventManager::Add(const EventTypes &eventType, std::shared_ptr<EventListener> listener)
 {
-    listeners.try_emplace(listener, eventType);
+    listeners.insert({listener, eventType});
 }
 
 void EventManager::Remove(const EventTypes &eventType, std::shared_ptr<EventListener> listenerToRemove)

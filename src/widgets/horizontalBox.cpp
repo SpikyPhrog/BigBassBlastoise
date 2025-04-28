@@ -1,4 +1,5 @@
 #include "horizontalBox.h"
+#include "../logger.h"
 
 HorizontalBox::HorizontalBox(const HBData& settings, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -44,28 +45,16 @@ void HorizontalBox::update()
 void HorizontalBox::SetPosition(const sf::Vector2f & newPosition)
 {
     hbShape->setPosition(newPosition);
-    if (children.size() > 0)
-    {
-        sf::Vector2f lastElementPos {0.f, 0.f};
-        float element_size = 0;
-
-        for (auto child : children)
-        {
-            lastElementPos.y = hbShape->getPosition().y + child->GetSize().y;
-            lastElementPos.x = hbShape->getPosition().x + element_size + elementPadding;
-            child->SetPosition(lastElementPos);
-            element_size = child->GetSize().x;
-        }   
-    }
+    SetChildrenPosition();
 }
 
-const sf::Vector2f & HorizontalBox::GetPosition()
+const sf::Vector2f& HorizontalBox::GetPosition()
 {
     if (!hbShape)
     {
+        Logger::Log(LoggerLevel::ERROR, "%s", "HB SHAPE IS NOT VALID!!!!!!");
         return sf::Vector2f(0.f, 0.f);
     }
-    
     return hbShape->getPosition();
 }
 
@@ -87,4 +76,21 @@ void HorizontalBox::AddWidget(std::shared_ptr<BaseWidget> widgetToAdd)
     
     widgetToAdd->SetPosition(lastChildPosition);
     children.emplace_back(widgetToAdd);
+}
+
+void HorizontalBox::SetChildrenPosition()
+{
+    if (children.size() > 0)
+    {
+        sf::Vector2f lastElementPos {0.f, 0.f};
+        float element_size = 0;
+        
+        for (auto child : children)
+        {
+            lastElementPos.y = hbShape->getPosition().y;
+            lastElementPos.x = hbShape->getPosition().x + element_size + elementPadding;
+            child->SetPosition(lastElementPos);
+            element_size = child->GetSize().x;
+        }   
+    }
 }

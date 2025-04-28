@@ -15,7 +15,7 @@ GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shar
     
     playerChar = std::make_shared<Player>(playerStartPos, *inAssetManager->gameFont);
     gameState = GameStates::MainMenu;
-    enemySpawner = std::make_unique<EnemySpawner>(inAssetManager, inWindow, playerChar);
+    enemySpawner = std::make_shared<EnemySpawner>(inAssetManager, inWindow, playerChar);
 }
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
