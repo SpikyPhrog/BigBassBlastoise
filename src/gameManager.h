@@ -5,18 +5,9 @@
 #include "enemy.h"
 #include "enemySpawner.h"
 #include "eventListener.h"
+#include "gameStates.h"
 
 class AssetManager;
-
-enum class GameStates
-{
-    MainMenu,
-    Options,
-    Start,
-    Paused,
-    GameOver,
-    PromptSettings
-};
 
 class GameManager : public sf::Drawable, public EventListener
 {

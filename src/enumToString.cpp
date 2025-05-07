@@ -10,4 +10,6 @@
 
 #include "eventTypes.h"
 
+#include "gameStates.h"
+
 #undef GENERATE_ENUM_STRINGS   // Stop string generation

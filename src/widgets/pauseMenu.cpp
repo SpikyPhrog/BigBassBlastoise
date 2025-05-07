@@ -26,7 +26,7 @@ BaseWidget(window)
 
 void PauseMenu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-    if (GameManager::GetGameState() != GameStates::Paused)
+    if (GameManager::GetGameState() != GameStates::GS_Paused)
     {
         return;
     }
@@ -72,16 +72,16 @@ void PauseMenu::update()
 
 void PauseMenu::OnResumeClicked()
 {
-    GameManager::SetGameState(GameStates::Start);
+    GameManager::SetGameState(GameStates::GS_Start);
 }
 
 void PauseMenu::OnOptionsClicked()
 {
     System::Get()->config->CacheConfigs();
-    GameManager::SetGameState(GameStates::Options);
+    GameManager::SetGameState(GameStates::GS_Options);
 }
 
 void PauseMenu::OnQuitClicked()
 {
-    GameManager::SetGameState(GameStates::MainMenu);
+    GameManager::SetGameState(GameStates::GS_MainMenu);
 }

@@ -24,7 +24,7 @@ BaseWidget(window)
 
 void MainMenu::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-    if (GameManager::GetGameState() == GameStates::Start)
+    if (GameManager::GetGameState() == GameStates::GS_Start)
     {
         return;
     }
@@ -47,7 +47,7 @@ const sf::Vector2f & MainMenu::GetPosition()
 
 void MainMenu::update()
 {
-    if (GameManager::GetGameState() == GameStates::Start)
+    if (GameManager::GetGameState() == GameStates::GS_Start)
     {
         return;
     }
@@ -60,7 +60,7 @@ void MainMenu::update()
 
 void MainMenu::OnPlayClicked()
 {
-    GameManager::SetGameState(GameStates::Start);
+    GameManager::SetGameState(GameStates::GS_Start);
     
     UI_Data data;
     data.data = 3;
@@ -68,7 +68,7 @@ void MainMenu::OnPlayClicked()
     void* dataPtr = &data;
 
     System::Get()->BroadcastEvent(EventTypes::UI_LIVES, dataPtr);
-    System::Get()->BroadcastEvent(EventTypes::GS_Start, NULL);
+    System::Get()->BroadcastEvent(EventTypes::GSE_Start, NULL);
 
     dataPtr = nullptr;
 }
@@ -76,7 +76,7 @@ void MainMenu::OnPlayClicked()
 void MainMenu::OnOptionsClicked()
 {
     System::Get()->config->CacheConfigs();
-    GameManager::SetGameState(GameStates::Options);
+    GameManager::SetGameState(GameStates::GS_Options);
 }
 
 void MainMenu::OnQuitClicked()

@@ -29,26 +29,26 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
     
     switch (GameManager::GetGameState())
     {
-    case GameStates::Paused:
+    case GameStates::GS_Paused:
         target.draw(*pauseMenu);
         break;
     
-    case GameStates::MainMenu:
+    case GameStates::GS_MainMenu:
         target.draw(*mainMenu); 
         break;
     
-    case GameStates::Options:
+    case GameStates::GS_Options:
         target.draw(*optionsMenu);
         break;
 
-    case GameStates::GameOver:
+    case GameStates::GS_GameOver:
         target.draw(*gameOverWidget);
         break;
 
-    case GameStates::Start:
+    case GameStates::GS_Start:
         target.draw(*playerHUD);
         break;
-    case GameStates::PromptSettings:
+    case GameStates::GS_PromptSettings:
         target.draw(*promptWidget);
         break;
     }
@@ -56,34 +56,33 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
 
 void UIManager::update()
 {
-    if (mainMenu && GameManager::GetGameState() == GameStates::MainMenu)
+    if (mainMenu && GameManager::GetGameState() == GameStates::GS_MainMenu)
     {
         mainMenu->update();
     }
 
-    if (pauseMenu && GameManager::GetGameState() == GameStates::Paused)
+    if (pauseMenu && GameManager::GetGameState() == GameStates::GS_Paused)
     {
         pauseMenu->update();
     }
 
-    if (optionsMenu && GameManager::GetGameState() == GameStates::Options)
+    if (optionsMenu && GameManager::GetGameState() == GameStates::GS_Options)
     {
         optionsMenu->update();
     }
     
-    if (gameOverWidget && GameManager::GetGameState() == GameStates::GameOver)
+    if (gameOverWidget && GameManager::GetGameState() == GameStates::GS_GameOver)
     {
         gameOverWidget->update();
     }
 
-    if (playerHUD && GameManager::GetGameState() == GameStates::Start)
+    if (playerHUD && GameManager::GetGameState() == GameStates::GS_Start)
     {
         playerHUD->update();
     }
     
-    if (promptWidget && GameManager::GetGameState() == GameStates::PromptSettings)
+    if (promptWidget && GameManager::GetGameState() == GameStates::GS_PromptSettings)
     {
         promptWidget->update();
     }
-    
 }

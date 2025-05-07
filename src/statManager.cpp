@@ -21,10 +21,20 @@ int StatManager::UpdateHealth(const int &modifier)
 
     if (lives <= 0)
     {
-        GameManager::SetGameState(GameStates::GameOver);
-        System::Get()->BroadcastEvent(EventTypes::GS_GameOver, NULL);
+        GameManager::SetGameState(GameStates::GS_GameOver);
+        System::Get()->BroadcastEvent(EventTypes::GSE_GameOver, NULL);
         return 0;
     }
     
     return lives;
+}
+
+void StatManager::IncreaseErrors()
+{
+    errors++;
+}
+
+void StatManager::ResetErrors()
+{
+    errors = 0;
 }

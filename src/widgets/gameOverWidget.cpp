@@ -74,5 +74,5 @@ void GameOverWidget::update()
 
 void GameOverWidget::GoToMainMenu()
 {
-    GameManager::SetGameState(GameStates::MainMenu);
+    GameManager::SetGameState(GameStates::GS_MainMenu);
 }

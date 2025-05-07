@@ -34,6 +34,7 @@ void EnemySpawner::update(const sf::Time & deltaTime)
     }
     if(enemiesDefeated >= enemiesSpawnedPerRound)
     {
+        // System::Get()->gameManager->SetState
         // run timer
         if (clock.getElapsedTime() >= timeBetweenWaves)
         {
@@ -81,6 +82,10 @@ void EnemySpawner::ProcessInput(const char & input)
 
             dataPtr = nullptr;
         }
+    }
+    else
+    {
+        System::Get()->statManager->IncreaseErrors();
     }
     
 }
