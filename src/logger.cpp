@@ -62,6 +62,12 @@ void Logger::Log(const LoggerLevel &logLevel, char *fmt, ...)
         }
         break;
 
+        case 'p':
+        {
+            void* ptr = va_arg(args, void*);
+            logEntry << ' ' << ptr;
+        }
+
         default:
         break;
         }

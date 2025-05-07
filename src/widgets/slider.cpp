@@ -1,6 +1,8 @@
 #include "slider.h"
 #include "../math.h"
 #include "../system.h"
+#include "../eventStructs.h"
+#include "../logger.h"
 
 Slider::Slider(std::shared_ptr<sf::RenderWindow> window):
 MenuWidget(window)

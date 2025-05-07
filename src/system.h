@@ -3,6 +3,8 @@
 #include "config.h"
 #include "eventManager.h"
 #include "statManager.h"
+#include "eventTypes.h"
+#include "configs.h"
 
 class System
 {
@@ -13,6 +15,7 @@ public:
     static std::shared_ptr<System> Get();
 
     void AddEvent(const EventTypes& eventType, std::shared_ptr<EventListener> listener);
+    void AddEvent(const EventTypes& eventType, std::shared_ptr<EventListener> listener, const Configs& config);
     void BroadcastEvent(const EventTypes& eventType, void* data);
     void BroadcastEvent(const EventTypes& eventType, void* data, std::shared_ptr<EventListener> listener);
 

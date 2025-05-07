@@ -1,11 +1,16 @@
 #pragma once
 
-struct UI_Data
+struct BaseEventStruct
+{
+    const char* configString {""};
+};
+
+struct UI_Data : BaseEventStruct
 {
     int data {0};
 };
 
-struct UI_Slider_Data
+struct UI_Slider_Data : BaseEventStruct
 {
     float data {0};
 };

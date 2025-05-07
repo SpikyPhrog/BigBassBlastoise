@@ -12,7 +12,7 @@ class AssetManager;
 class SettingSliderOptionWidget : public BaseWidget
 {
 public:
-    SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window);
+    SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window, const Configs& config);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void update() override;

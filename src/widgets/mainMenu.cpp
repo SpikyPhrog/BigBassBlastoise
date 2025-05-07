@@ -75,6 +75,7 @@ void MainMenu::OnPlayClicked()
 
 void MainMenu::OnOptionsClicked()
 {
+    System::Get()->config->CacheConfigs();
     GameManager::SetGameState(GameStates::Options);
 }
 

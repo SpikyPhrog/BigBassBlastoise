@@ -2,6 +2,9 @@
 #include <fstream>
 #include <string>
 #include "consts.h"
+#include "logger.h"
+#include "eventTypes.h"
+#include "system.h"
 
 Config::Config()
 {
@@ -26,8 +29,22 @@ const std::basic_string<char,std::char_traits<char>,std::allocator<char>> &Confi
 
 void Config::RevertChanges()
 {
-    SetDefaultValues(true);
+    for (auto config : lastChangeCfgs)
+    {
+        EventTypes event = System::Get()->eventManager->GetEventType(config.first);
+
+        BaseEventStruct data;
+        data.configString = config.second.c_str();
+
+        void* dataPtr = &data;
+
+        System::Get()->BroadcastEvent(event, dataPtr);
+
+        dataPtr = nullptr;
+    }
+    
     updatedCfgs.clear();
+    lastChangeCfgs.clear();
 }
 
 void Config::SaveChanges()
@@ -43,6 +60,14 @@ void Config::UpdateConfig(const Configs &cfg, const std::string &newSetting)
     }
     else
     {
+        if (auto cfgSearch = cfgs.find(cfg); cfgSearch != cfgs.end())
+        {
+            if (newSetting == cfgSearch->second)
+            {
+                Logger::Log(LoggerLevel::DEBUG, "%s", "No update is required");
+                return;
+            }           
+        }   
         updatedCfgs.try_emplace(cfg, newSetting);
     }
 }
@@ -158,7 +183,14 @@ void Config::SerialiseConfigs()
     {
         std::string Key = GetStringConfigs(config.first);
         cfgFile << Key << "=" << config.second << ";\n";
-    }    
+    }
 
     cfgFile.close();
+    updatedCfgs.clear();
+    lastChangeCfgs.clear();
+}
+
+void Config::CacheConfigs()
+{
+    lastChangeCfgs.insert(cfgs.begin(), cfgs.end());
 }

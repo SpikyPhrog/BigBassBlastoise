@@ -8,4 +8,6 @@
 
 #include "loggerLevels.h"
 
+#include "eventTypes.h"
+
 #undef GENERATE_ENUM_STRINGS   // Stop string generation

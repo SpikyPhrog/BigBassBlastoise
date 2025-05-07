@@ -37,13 +37,3 @@ struct VBData : HBData
     bool bFullHeight                                            {false};
     bool bFullWidth                                             {false};
 };
-
-enum class EventTypes 
-{
-    UI_SCORE,
-    UI_LIVES,
-    UI_Slider,
-
-    GS_GameOver,
-    GS_Start,
-};

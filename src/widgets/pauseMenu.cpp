@@ -2,6 +2,7 @@
 #include "button.h"
 #include "verticalBox.h"
 #include "../gameManager.h"
+#include "../system.h"
 
 PauseMenu::PauseMenu(const sf::Font & font, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -76,6 +77,7 @@ void PauseMenu::OnResumeClicked()
 
 void PauseMenu::OnOptionsClicked()
 {
+    System::Get()->config->CacheConfigs();
     GameManager::SetGameState(GameStates::Options);
 }
 

@@ -24,6 +24,11 @@ void System::AddEvent(const EventTypes &eventType, std::shared_ptr<EventListener
     eventManager->Add(eventType, listener);
 }
 
+void System::AddEvent(const EventTypes &eventType, std::shared_ptr<EventListener> listener, const Configs &config)
+{
+    eventManager->Add(eventType, listener, config);
+}
+
 void System::BroadcastEvent(const EventTypes &eventType, void *data)
 {
     eventManager->Broadcast(eventType, data);

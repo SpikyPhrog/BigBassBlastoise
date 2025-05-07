@@ -42,8 +42,24 @@ void AudioSlider::Update(void *inData)
     }
     
     if (data != nullptr && music != nullptr)
-    {   
-        float volume = data->data * 100;
+    {           
+        float volume = 0;
+        float value = 0;
+
+        if (data->configString[0] != '\0') // check if string is empty
+        {
+            value = std::stof(data->configString);            
+            volume = value * 100;
+        }
+        else
+        {
+            value = data->data;
+            volume = data->data * 100;
+        }
+
+        float knobPosY = sliderLine->getPosition().y + (sliderLine->getSize().y / 2);
+        float knobPosX = (value * (endPoint.x - startPoint.x)) + startPoint.x;
+        sliderKnob->setPosition(sf::Vector2f(knobPosX, knobPosY));
 
         Logger::Log(LoggerLevel::DEBUG, "sf",GetName().c_str(), volume);
 

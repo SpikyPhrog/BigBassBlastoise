@@ -5,7 +5,7 @@
 #include "../assetManager.h"
 #include "../system.h"
 
-SettingSliderOptionWidget::SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window):
+SettingSliderOptionWidget::SettingSliderOptionWidget(std::shared_ptr<AssetManager> assetManager, const std::string& inLabelText, const HBData& hbSettings, std::shared_ptr<sf::RenderWindow> window, const Configs& config):
 BaseWidget(window)
 {
     label = std::make_shared<TextWidget>(*assetManager->gameFont, inLabelText, window);
@@ -13,7 +13,9 @@ BaseWidget(window)
     slider->SetSelf(slider);
     SetSliderName(inLabelText);
 
-    System::Get()->AddEvent(EventTypes::UI_Slider, slider);
+    System::Get()->AddEvent(EventTypes::UI_Slider, slider, config);
+
+    SetSliderConfig(config);
 
     settings = hbSettings;
 

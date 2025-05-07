@@ -18,6 +18,8 @@ public:
     void UpdateConfig(const Configs& cfg, const std::string& newSetting);
     bool GetAnyChangesMade();
 
+    void CacheConfigs();
+
 private:
     void SetDefaultValues(bool bForce = false);
     void DeserializeFile();
@@ -27,5 +29,6 @@ private:
     bool bFileExists                                            {false};
 
     std::unordered_map<Configs, std::string> cfgs               {};
-    std::unordered_map<Configs, std::string> updatedCfgs        {};
+    std::unordered_map<Configs, std::string> updatedCfgs        {}; // Will be deleted in the future update with a save/revert changes optimisation. TBD when
+    std::unordered_map<Configs, std::string> lastChangeCfgs     {};
 };

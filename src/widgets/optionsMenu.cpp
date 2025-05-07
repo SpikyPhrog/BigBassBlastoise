@@ -10,6 +10,8 @@
 OptionsMenu::OptionsMenu(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window): 
 BaseWidget(window)
 {
+    System::Get()->config->CacheConfigs();
+
     VBData settings;
     settings.position = sf::Vector2f(350.f, 100.f);
 
@@ -21,14 +23,13 @@ BaseWidget(window)
     hbSettings.position = settings.position;
     hbSettings.size = sf::Vector2f(400.f, 75.f);
 
-    musicSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Master Volume", hbSettings, window);
-    musicSliderOption->SetSliderConfig(Configs::MasterVolume);
+    musicSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Master Volume", hbSettings, window, Configs::MasterVolume);
     musicSliderOption->SetSliderAudio(assetManager->mainMusic);
 
     std::string masterVolumeValue = System::Get()->config->GetConfig(Configs::MasterVolume);
     musicSliderOption->SetSliderValue(std::stof(masterVolumeValue));
 
-    testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window);
+    testSliderOption = std::make_shared<SettingSliderOptionWidget>(assetManager, "Test Slider Option", hbSettings, window, Configs::None);
 
     buttonVB->AddWidget(musicSliderOption);
     buttonVB->AddWidget(testSliderOption);
@@ -71,5 +72,9 @@ void OptionsMenu::OnClickedBack()
     if(System::Get()->config->GetAnyChangesMade())
     {
         GameManager::SetGameStateToPrompt();
+    }
+    else
+    {
+        GameManager::SetGameState(GameManager::GetPreviousGameState());
     }
 }
