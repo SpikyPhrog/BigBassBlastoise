@@ -22,6 +22,7 @@ BEGIN_ENUM(GameStates)
     DECL_ENUM_ELEMENT(GS_Paused),
     DECL_ENUM_ELEMENT(GS_GameOver),
     DECL_ENUM_ELEMENT(GS_PromptSettings),
+    DECL_ENUM_ELEMENT(GS_PostWaveComplete),
 }
 END_ENUM(GameStates)
 #endif // (!defined(GAMESTATES_H) || defined(GENERATE_ENUM_STRINGS))

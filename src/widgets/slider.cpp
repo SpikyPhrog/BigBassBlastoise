@@ -98,7 +98,7 @@ void Slider::SetValue(const float &inValue)
 
     void* dataPtr = &data;
 
-    System::Get()->BroadcastEvent(EventTypes::UI_Slider, dataPtr, Get());
+    System::Get()->BroadcastEvent(EventTypes::UI_SLIDER, dataPtr, Get());
 
     dataPtr = nullptr;
 }

@@ -3,6 +3,7 @@
 #include "consts.h"
 #include "system.h"
 #include "logger.h"
+#include "gameManager.h"
 
 std::random_device dev;
 std::mt19937 rng(dev());
@@ -34,14 +35,21 @@ void EnemySpawner::update(const sf::Time & deltaTime)
     }
     if(enemiesDefeated >= enemiesSpawnedPerRound)
     {
-        // System::Get()->gameManager->SetState
+        if (!bHasBroadcastedEvents)
+        {
+            BroadcastStatEvents();
+        }
+        
+        GameManager::SetGameState(GameStates::GS_PostWaveComplete);
         // run timer
         if (clock.getElapsedTime() >= timeBetweenWaves)
         {
+            GameManager::SetGameState(GameStates::GS_Start);
             enemiesDefeated = 0;
     
             // restart the wave
             SpawnWave();
+            bHasBroadcastedEvents = false;
         }
     }
 }
@@ -170,6 +178,29 @@ void EnemySpawner::SpawnWave()
         enemy->SetWord(randomWord.c_str());
         enemyList.emplace_back(enemy);
     }
+}
+
+void EnemySpawner::BroadcastStatEvents()
+{    
+    UI_Data accuracyData;
+    accuracyData.data = System::Get()->statManager->GetAccuracy();
+
+    void* dataPtr = &accuracyData;
+
+    System::Get()->BroadcastEvent(EventTypes::UI_ACCURACY, dataPtr);
+
+    dataPtr = nullptr;
+
+    UI_Data errorData;
+    errorData.data = System::Get()->statManager->GetErrors();
+
+    void* errorDataPtr = &errorData;
+
+    System::Get()->BroadcastEvent(EventTypes::UI_ERRORS, errorDataPtr);
+
+    errorDataPtr = nullptr;
+
+    bHasBroadcastedEvents = true;
 }
 
 void EnemySpawner::Reset()

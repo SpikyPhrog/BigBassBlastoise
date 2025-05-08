@@ -13,7 +13,7 @@ BaseWidget(window)
     slider->SetSelf(slider);
     SetSliderName(inLabelText);
 
-    System::Get()->AddEvent(EventTypes::UI_Slider, slider, config);
+    System::Get()->AddEvent(EventTypes::UI_SLIDER, slider, config);
 
     SetSliderConfig(config);
 

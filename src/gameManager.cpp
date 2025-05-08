@@ -50,7 +50,7 @@ void GameManager::inputUpdate(const sf::Event::TextEntered* input)
 
 void GameManager::update(const sf::Time &deltaTime)
 {
-    if (gameState == GameStates::GS_Start)
+    if (gameState == GameStates::GS_Start || gameState == GameStates::GS_PostWaveComplete)
     {
         playerChar->SetPosition(enemySpawner->GetEnemyPos());
         enemySpawner->update(deltaTime);

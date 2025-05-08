@@ -6,6 +6,7 @@
 #include "widgets/gameOverWidget.h"
 #include "widgets/playerHUDWidget.h"
 #include "widgets/promptWidget.h"
+#include "widgets/postWaveWidget.h"
 #include "gameManager.h"
 #include "eventManager.h"
 
@@ -18,6 +19,7 @@ UIManager::UIManager(std::shared_ptr<AssetManager> assetManager, std::shared_ptr
     playerHUD = std::make_shared<PlayerHUD>(*assetManager->gameFont, window);    
     promptWidget = std::make_unique<PromptWidget>(assetManager, window);
     promptWidget->SetMessage("There are unsaved changes, do you want to save them?");
+    postWaveWidget = std::make_unique<PostWaveWidget>(assetManager, window);
 }
 
 void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
@@ -48,8 +50,13 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
     case GameStates::GS_Start:
         target.draw(*playerHUD);
         break;
+
     case GameStates::GS_PromptSettings:
         target.draw(*promptWidget);
+        break;
+
+    case GameStates::GS_PostWaveComplete:
+        target.draw(*postWaveWidget);
         break;
     }
 }
@@ -85,4 +92,10 @@ void UIManager::update()
     {
         promptWidget->update();
     }
+
+    if (postWaveWidget && GameManager::GetGameState() == GameStates::GS_PostWaveComplete)
+    {
+        postWaveWidget->update();
+    }
+    
 }

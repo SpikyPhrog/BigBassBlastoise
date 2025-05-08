@@ -13,7 +13,7 @@ constexpr int amountWaves                                       {5};
 constexpr int enemiesSpawnedPerRound                            {7};
 constexpr int enemyRewardDrop                                   {100};
 constexpr int playerStartHealth                                 {3};
-constexpr sf::Time timeBetweenWaves                             {sf::seconds(8.f)};
+constexpr sf::Time timeBetweenWaves                             {sf::seconds(3.f)};
 
 constexpr const char* fontFilePath                              {"assets/fonts/SalmonFont.otf"}; 
 constexpr const char* musicFilePath                             {"assets/music/BMB.mp3"}; 

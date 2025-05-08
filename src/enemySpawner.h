@@ -26,6 +26,8 @@ private:
 
     void SpawnWave();
 
+    void BroadcastStatEvents();
+
 private:
     std::vector<std::shared_ptr<Enemy>> enemyList               {};
     std::shared_ptr<Enemy> currentEnemy                         {nullptr};
@@ -40,4 +42,6 @@ private:
     // To calculate the elapsed time from the start of the word to the end of it
     float timeForWord                                           {0.f};
     sf::Clock clock;
+
+    bool bHasBroadcastedEvents                                  {false};
 };

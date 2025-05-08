@@ -8,6 +8,7 @@ class OptionsMenu;
 class GameOverWidget;
 class PlayerHUD;
 class PromptWidget;
+class PostWaveWidget;
 
 class UIManager : public sf::Drawable
 {
@@ -23,4 +24,5 @@ private:
     std::shared_ptr<GameOverWidget> gameOverWidget              {nullptr};
     std::shared_ptr<PlayerHUD> playerHUD                        {nullptr};
     std::shared_ptr<PromptWidget> promptWidget                  {nullptr};
+    std::shared_ptr<PostWaveWidget> postWaveWidget              {nullptr};
 };

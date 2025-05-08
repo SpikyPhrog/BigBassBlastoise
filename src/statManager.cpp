@@ -38,3 +38,18 @@ void StatManager::ResetErrors()
 {
     errors = 0;
 }
+
+const int &StatManager::GetErrors() const
+{
+    return errors;
+}
+
+const int &StatManager::GetAccuracy() const
+{
+    return accuracy;
+}
+
+void StatManager::CalculateAccuracy()
+{
+    accuracy = (errors / enemiesSpawnedPerRound) * 100;
+}
