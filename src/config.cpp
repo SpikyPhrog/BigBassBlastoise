@@ -2,7 +2,6 @@
 #include <fstream>
 #include <string>
 #include "consts.h"
-#include "logger.h"
 #include "eventTypes.h"
 #include "system.h"
 

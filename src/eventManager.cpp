@@ -1,6 +1,5 @@
 #include "eventManager.h"
 #include "eventListener.h"
-#include "logger.h"
 
 EventManager::EventManager()
 {

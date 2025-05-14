@@ -8,17 +8,23 @@ public:
 
     int UpdateScoring(const int& modifier);
     int UpdateHealth(const int& modifier);
+    
     void IncreaseErrors();
-    void ResetErrors();
-    const int& GetErrors() const;
-    const int& GetAccuracy() const;
+    void ResetErrorCount();
+    const float& GetErrorCount() const;
+    
+    const int& GetLives() const;
 
-    void CalculateAccuracy();
+    const float& GetAccuracy() const;
+
+    void ResetStats();
+
+    void CalculateAccuracy(const float& lettersCount);
 
 private:
     int lives                                                   {3};
     int score                                                   {0};
     int multiplier                                              {1};
-    int errors                                                  {0};
-    int accuracy                                                {0};
+    float errors                                                {0};
+    float accuracy                                              {0};
 };

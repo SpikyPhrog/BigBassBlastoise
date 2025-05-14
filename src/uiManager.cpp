@@ -47,18 +47,17 @@ void UIManager::draw(sf::RenderTarget& target, sf::RenderStates states) const
         target.draw(*gameOverWidget);
         break;
 
+    case GameStates::GS_PostWaveComplete:
+        target.draw(*postWaveWidget);
+    
     case GameStates::GS_Start:
         target.draw(*playerHUD);
         break;
-
+        
     case GameStates::GS_PromptSettings:
         target.draw(*promptWidget);
         break;
-
-    case GameStates::GS_PostWaveComplete:
-        target.draw(*postWaveWidget);
-        break;
-    }
+}
 }
 
 void UIManager::update()

@@ -2,7 +2,6 @@
 #include <random>
 #include "consts.h"
 #include "system.h"
-#include "logger.h"
 #include "gameManager.h"
 
 std::random_device dev;
@@ -41,11 +40,14 @@ void EnemySpawner::update(const sf::Time & deltaTime)
         }
         
         GameManager::SetGameState(GameStates::GS_PostWaveComplete);
+
         // run timer
         if (clock.getElapsedTime() >= timeBetweenWaves)
         {
             GameManager::SetGameState(GameStates::GS_Start);
             enemiesDefeated = 0;
+
+            // System::Get()->statManager->ResetErrors();
     
             // restart the wave
             SpawnWave();
@@ -75,9 +77,19 @@ void EnemySpawner::ProcessInput(const char & input)
     // we must check if its not null, in case the top check has set it to something
     if (currentEnemy != nullptr)
     {    
-        currentEnemy->ProcessInput(input);
-        currentEnemy->ProcessInput(ReverseInputCapitolisation(input));
+        bool check1 = currentEnemy->ProcessInput(input);
+        bool check2 = false;
 
+        if (!check1)
+        {
+            check2 = currentEnemy->ProcessInput(ReverseInputCapitolisation(input));
+        }
+        
+        if (!check1 && !check2)
+        {
+            System::Get()->statManager->IncreaseErrors();
+        }
+        
         if (currentEnemy->GetIsCompleted())
         {
             UI_Data data;
@@ -91,11 +103,6 @@ void EnemySpawner::ProcessInput(const char & input)
             dataPtr = nullptr;
         }
     }
-    else
-    {
-        System::Get()->statManager->IncreaseErrors();
-    }
-    
 }
 
 void EnemySpawner::draw(sf::RenderTarget & target, sf::RenderStates states) const
@@ -121,8 +128,7 @@ void EnemySpawner::DamagePlayer(std::shared_ptr<Enemy> enemy)
 
     void* dataPtr = &data;
 
-    System::Get()->BroadcastEvent(EventTypes::UI_LIVES, dataPtr);  
-
+    System::Get()->BroadcastEvent(EventTypes::UI_LIVES, dataPtr);
     DestroyEnemy();
 
     dataPtr = nullptr;
@@ -134,7 +140,6 @@ void EnemySpawner::DestroyEnemy()
     {
         return;
     }
-    
     currentEnemy->SetIsFocused(false);
     currentEnemy = nullptr;
     enemyList.erase(enemyList.begin() + currentEnemyIndex);
@@ -177,39 +182,46 @@ void EnemySpawner::SpawnWave()
         std::string randomWord = *it;
         enemy->SetWord(randomWord.c_str());
         enemyList.emplace_back(enemy);
+        spawnedLettersCount += enemyList[i]->GetWordSize();
     }
 }
 
 void EnemySpawner::BroadcastStatEvents()
 {    
+    System::Get()->statManager->CalculateAccuracy(spawnedLettersCount);
+    
+    int acc = System::Get()->statManager->GetAccuracy();
+
     UI_Data accuracyData;
-    accuracyData.data = System::Get()->statManager->GetAccuracy();
+    accuracyData.data = acc;
 
     void* dataPtr = &accuracyData;
 
     System::Get()->BroadcastEvent(EventTypes::UI_ACCURACY, dataPtr);
 
     dataPtr = nullptr;
-
-    UI_Data errorData;
-    errorData.data = System::Get()->statManager->GetErrors();
-
-    void* errorDataPtr = &errorData;
-
-    System::Get()->BroadcastEvent(EventTypes::UI_ERRORS, errorDataPtr);
-
-    errorDataPtr = nullptr;
-
     bHasBroadcastedEvents = true;
 }
 
 void EnemySpawner::Reset()
 {
+    currentEnemy->SetIsFocused(false);
+    currentEnemy = nullptr;
+    currentEnemyIndex = 0;
+    enemiesDefeated = 0;
     enemyList.clear();
+
+    UI_Data data;
+    data.data = 0;
+
+    void* dataPtr = &data;
+
+    System::Get()->BroadcastEvent(EventTypes::UI_SCORE, dataPtr);  
+    
+    dataPtr = nullptr;
 }
 
 void EnemySpawner::Start()
 {
     SpawnWave();
-    Logger::Log(LoggerLevel::DEBUG, "%s", "Spawning wave");
 }

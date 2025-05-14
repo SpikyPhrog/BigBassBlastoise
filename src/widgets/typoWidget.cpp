@@ -53,6 +53,6 @@ void TypoWidget::update()
 
 void TypoWidget::Update(void* data)
 {   
-    std::string errorsString = "Errors: " + std::to_string(System::Get()->statManager->GetErrors());
-    errorsMessage->SetText(errorsString);
+    // std::string errorsString = "Errors: " + std::to_string(System::Get()->statManager->GetErrors());
+    // errorsMessage->SetText(errorsString);
 }

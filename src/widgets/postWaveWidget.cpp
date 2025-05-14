@@ -2,6 +2,8 @@
 #include "verticalBox.h"
 #include "../assetManager.h"
 #include "../system.h"
+#include "../gameManager.h"
+#include "../logger.h"
 #include "accuracyWidget.h"
 #include "typoWidget.h"
 
@@ -12,6 +14,7 @@ BaseWidget(window)
     VBData settings;
     settings.size = sf::Vector2f(300.f, 300.f);
     settings.padding = sf::Vector2f(50.f, 50.f);
+    settings.position = sf::Vector2f(400.f, 100.f);
     
     vbMessages = std::make_unique<VerticalBox>(settings, window);
 
@@ -28,6 +31,11 @@ BaseWidget(window)
 
 void PostWaveWidget::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {   
+    if (GameManager::GetGameState() != GameStates::GS_PostWaveComplete)
+    {
+        return;
+    }
+    
     if (vbMessages)
     {
         target.draw(*vbMessages);

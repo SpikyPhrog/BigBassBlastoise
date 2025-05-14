@@ -43,5 +43,7 @@ private:
     float timeForWord                                           {0.f};
     sf::Clock clock;
 
+    int spawnedLettersCount                                      {0};
+
     bool bHasBroadcastedEvents                                  {false};
 };

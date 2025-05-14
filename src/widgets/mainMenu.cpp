@@ -62,8 +62,10 @@ void MainMenu::OnPlayClicked()
 {
     GameManager::SetGameState(GameStates::GS_Start);
     
+    // Logger::Log(LoggerLevel::DEBUG, "ss", "Gamestate: ", GetStringGameStates(GameManager::GetGameState()));
+
     UI_Data data;
-    data.data = 3;
+    data.data = System::Get()->statManager->GetLives();
 
     void* dataPtr = &data;
 

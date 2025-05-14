@@ -8,10 +8,12 @@ public:
     Enemy(const sf::Vector2f& characterStartingPos, const sf::Font& font);
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
     void update(const sf::Time& deltaTime) override;
-    void ProcessInput(const char& input);
+    bool ProcessInput(const char& input);
 
     void SetWord(const char* inWord);
     const std::string GetWord();
+
+    const int& GetWordSize() const;
 
     bool GetIsFocused() const { return bIsFocused; }
     void SetIsFocused(bool isFocused);

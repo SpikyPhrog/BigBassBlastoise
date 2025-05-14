@@ -3,6 +3,7 @@
 #include "assetManager.h"
 #include "eventManager.h"
 
+
 GameStates GameManager::gameState = GameStates::GS_MainMenu;
 GameStates GameManager::previousGameState = GameStates::GS_MainMenu;
 
@@ -20,7 +21,7 @@ GameManager::GameManager(std::shared_ptr<AssetManager> inAssetManager, std::shar
 
 void GameManager::draw(sf::RenderTarget & target, sf::RenderStates states) const
 {
-    if (GetGameState() == GameStates::GS_Start)
+    if (GetGameState() == GameStates::GS_Start || GetGameState() == GameStates::GS_PostWaveComplete)
     {
         target.draw(*enemySpawner);
         target.draw(*playerChar);

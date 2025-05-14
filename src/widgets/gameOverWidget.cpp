@@ -3,6 +3,7 @@
 #include "button.h"
 #include "verticalBox.h"
 #include "../gameManager.h"
+#include "../system.h"
 
 GameOverWidget::GameOverWidget(const sf::Font& font, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)
@@ -75,4 +76,5 @@ void GameOverWidget::update()
 void GameOverWidget::GoToMainMenu()
 {
     GameManager::SetGameState(GameStates::GS_MainMenu);
+    System::Get()->statManager->ResetStats();
 }

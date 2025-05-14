@@ -1,6 +1,7 @@
 #include "enemy.h"
 #include <iostream>
 #include "consts.h"
+#include "system.h"
 
 Enemy::Enemy(const sf::Vector2f& characterStartingPos, const sf::Font& font):
 Character(characterStartingPos, font)
@@ -79,11 +80,16 @@ const std::string Enemy::GetWord()
     return characterWord;
 }
 
-void Enemy::ProcessInput(const char& input)
+const int &Enemy::GetWordSize() const
+{
+    return wordSize;
+}
+
+bool Enemy::ProcessInput(const char& input)
 {
     if (!bIsFocused)
     {
-        return;
+        return false;
     }
 
     if (currentLetter[currentIndex] == input)
@@ -97,7 +103,11 @@ void Enemy::ProcessInput(const char& input)
             SetIsFocused(false);
             Kill();
         }
+
+        return true;
     }
+
+    return false;
 }
 
 void Enemy::SetIsFocused(bool isFocused)

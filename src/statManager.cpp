@@ -34,22 +34,35 @@ void StatManager::IncreaseErrors()
     errors++;
 }
 
-void StatManager::ResetErrors()
+void StatManager::ResetErrorCount()
 {
     errors = 0;
 }
 
-const int &StatManager::GetErrors() const
+const float &StatManager::GetErrorCount() const
 {
     return errors;
 }
 
-const int &StatManager::GetAccuracy() const
+const float &StatManager::GetAccuracy() const
 {
     return accuracy;
 }
 
-void StatManager::CalculateAccuracy()
+void StatManager::CalculateAccuracy(const float& lettersCount)
 {
-    accuracy = (errors / enemiesSpawnedPerRound) * 100;
+    accuracy = ((lettersCount - errors) / lettersCount) * 100;
+}
+
+const int &StatManager::GetLives() const
+{
+    return lives;
+}
+
+void StatManager::ResetStats()
+{
+    score = 0;
+    errors = 0;
+    accuracy = 0;
+    lives = 3;
 }
