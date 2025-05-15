@@ -3,7 +3,7 @@
 
 class AssetManager;
 class AccuracyWidget;
-class TypoWidget;
+class BonusScoreWidget;
 class VerticalBox;
 
 class PostWaveWidget: public BaseWidget
@@ -18,7 +18,7 @@ public:
     void update() override;
 
 private:
-    std::unique_ptr<VerticalBox> vbMessages;
-    std::shared_ptr<AccuracyWidget> accuracyWidget;
-    std::shared_ptr<TypoWidget> errorsWidget;
+    std::unique_ptr<VerticalBox> vbMessages                     {nullptr};
+    std::shared_ptr<AccuracyWidget> accuracyWidget              {nullptr};
+    std::shared_ptr<BonusScoreWidget> bonusScoreMessage         {nullptr};
 };

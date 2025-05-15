@@ -1,9 +1,8 @@
-#include "../assetManager.h"
 #include "accuracyWidget.h"
 #include "textWidget.h"
+#include "../assetManager.h"
 #include "../system.h"
 #include "../eventStructs.h"
-#include "../logger.h"
 
 AccuracyWidget::AccuracyWidget(std::shared_ptr<AssetManager> assetManager, std::shared_ptr<sf::RenderWindow> window):
 BaseWidget(window)

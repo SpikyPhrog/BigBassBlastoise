@@ -6,10 +6,10 @@
 class AssetManager;
 class TextWidget;
 
-class AccuracyWidget : public BaseWidget, public EventListener
+class BonusScoreWidget : public BaseWidget, public EventListener
 {
 public:
-    AccuracyWidget(std::shared_ptr<AssetManager>assetManager, std::shared_ptr<sf::RenderWindow> window);
+    BonusScoreWidget(std::shared_ptr<AssetManager>assetManager, std::shared_ptr<sf::RenderWindow> window);
 
     void draw(sf::RenderTarget& target, sf::RenderStates states) const override;
         
@@ -20,5 +20,5 @@ public:
     void Update(void* inData) override;
 
 private:
-    std::shared_ptr<TextWidget> accuracyMessage                 {nullptr};
+    std::shared_ptr<TextWidget> bonusScoreMessage               {nullptr};
 };

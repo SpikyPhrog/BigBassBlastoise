@@ -187,10 +187,32 @@ void EnemySpawner::BroadcastStatEvents()
     
     int acc = System::Get()->statManager->GetAccuracy();
 
+    if (acc > 95)
+    {
+        UI_Data bonusScoreData;
+        UI_Data scoreData;
+        int bonusScore = acc * System::Get()->GetRandomNumber(10, 50);
+
+        Logger::Log(LoggerLevel::DEBUG, "si", "Bonus score: ", bonusScore);
+
+        bonusScoreData.data = bonusScore;
+        scoreData.data = System::Get()->statManager->UpdateScoring(bonusScore);
+
+        void* bonusDataPtr = &bonusScoreData;
+        void* scoreDataPtr = &scoreData;
+
+        System::Get()->BroadcastEvent(EventTypes::UI_BONUSSCORE, bonusDataPtr);  
+        System::Get()->BroadcastEvent(EventTypes::UI_SCORE, scoreDataPtr);  
+
+        bonusDataPtr = nullptr;
+        scoreDataPtr = nullptr;
+    }
+    
     UI_Data accuracyData;
     accuracyData.data = acc;
 
     void* dataPtr = &accuracyData;
+    System::Get()->statManager->ResetErrorCount();
 
     System::Get()->BroadcastEvent(EventTypes::UI_ACCURACY, dataPtr);
 
