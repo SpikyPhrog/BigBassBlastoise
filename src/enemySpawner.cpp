@@ -4,8 +4,8 @@
 #include "system.h"
 #include "gameManager.h"
 
-std::random_device dev;
-std::mt19937 rng(dev());
+// std::random_device dev;
+// std::mt19937 rng(dev());
 
 EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::shared_ptr<sf::RenderWindow> inWindow, std::shared_ptr<Player> inPlayer)
 {
@@ -13,8 +13,6 @@ EnemySpawner::EnemySpawner(std::shared_ptr<AssetManager> inAssetManager, std::sh
     window = inWindow;
     assetManager = inAssetManager;
     enemyList.reserve(enemiesSpawnedPerRound);
-
-    // SpawnWave();
 
     // switch the size to be screen height
     HitLine = std::make_shared<sf::RectangleShape>(sf::Vector2f{50.f, 600.f});
@@ -46,8 +44,6 @@ void EnemySpawner::update(const sf::Time & deltaTime)
         {
             GameManager::SetGameState(GameStates::GS_Start);
             enemiesDefeated = 0;
-
-            // System::Get()->statManager->ResetErrors();
     
             // restart the wave
             SpawnWave();
@@ -168,18 +164,17 @@ char EnemySpawner::ReverseInputCapitolisation(const char &input)
 
 void EnemySpawner::SpawnWave()
 {
-    std::uniform_int_distribution<std::mt19937::result_type> dist(1, assetManager->GetDictionarySize());
-    std::unordered_set<std::string>::iterator it = assetManager->dictionary.begin();
-
     for (int i = 0; i < enemiesSpawnedPerRound; i++)
     {
+        std::unordered_set<std::string>::iterator it = assetManager->dictionary.begin();
         const float& StartX = window->getSize().x;
         std::shared_ptr<Enemy> enemy = std::make_shared<Enemy>(sf::Vector2f(StartX, i * 50), *assetManager->gameFont);
-        int randomId = dist(rng);
+        int randomId = System::Get()->GetRandomNumber(1, assetManager->GetDictionarySize() - 1);
 
         std::advance(it, randomId);
-
+        
         std::string randomWord = *it;
+        
         enemy->SetWord(randomWord.c_str());
         enemyList.emplace_back(enemy);
         spawnedLettersCount += enemyList[i]->GetWordSize();

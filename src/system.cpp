@@ -2,6 +2,9 @@
 
 std::shared_ptr<System> System::system_ = nullptr;
 
+std::random_device dev;
+std::mt19937 rng(dev());
+
 System::System()
 {
     config = std::make_unique<Config>();
@@ -37,4 +40,12 @@ void System::BroadcastEvent(const EventTypes &eventType, void *data)
 void System::BroadcastEvent(const EventTypes &eventType, void *data, std::shared_ptr<EventListener> listener)
 {
     eventManager->Broadcast(eventType, data, listener);
+}
+
+int System::GetRandomNumber(const int& rangeA, const int& rangeB)
+{
+    std::uniform_int_distribution<std::mt19937::result_type> dist(rangeA, rangeB);
+    int randomNumber = dist(rng);
+
+    return randomNumber;
 }

@@ -1,8 +1,13 @@
-[08/05/2025 11:06:53.295]DEBUG:  Master Volume 19.1667
-[08/05/2025 11:06:53.296]DEBUG:  No update is required
-[08/05/2025 11:06:53.296]DEBUG:  Master Volume 19.1667
-[08/05/2025 11:06:53.297]DEBUG:  No update is required
-[08/05/2025 11:06:53.297]DEBUG:  Master Volume 19.1667
-[08/05/2025 11:06:53.297]DEBUG:  No update is required
-[08/05/2025 11:06:53.297]DEBUG:  Master Volume 19.1667
-[08/05/2025 11:06:53.297]DEBUG:  No update is required
+[15/05/2025 10:22:03.002]DEBUG:  Master Volume 0
+[15/05/2025 10:22:03.003]DEBUG:  No update is required
+[15/05/2025 10:22:03.004]DEBUG:  Master Volume 0
+[15/05/2025 10:22:03.004]DEBUG:  No update is required
+[15/05/2025 10:22:03.004]DEBUG:  Master Volume 0
+[15/05/2025 10:22:03.005]DEBUG:  No update is required
+[15/05/2025 10:22:03.005]DEBUG:  Master Volume 0
+[15/05/2025 10:22:03.005]DEBUG:  No update is required
+[15/05/2025 10:22:25.419]DEBUG:  Received an event??
+[15/05/2025 10:22:38.770]DEBUG:  Received an event??
+[15/05/2025 10:22:54.260]DEBUG:  Received an event??
+[15/05/2025 10:23:09.037]DEBUG:  Received an event??
+[15/05/2025 10:23:25.831]DEBUG:  Received an event??

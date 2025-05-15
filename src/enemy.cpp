@@ -2,14 +2,20 @@
 #include <iostream>
 #include "consts.h"
 #include "system.h"
+#include <random>
+
 
 Enemy::Enemy(const sf::Vector2f& characterStartingPos, const sf::Font& font):
 Character(characterStartingPos, font)
 {
+
+    
     characterShape->setSize(sf::Vector2f(enemyCharacterSize, enemyCharacterSize));
     characterShape->setFillColor(sf::Color::Blue);
     
-    rewardDrop = enemyRewardDrop;
+    int randomBonus = System::Get()->GetRandomNumber(1, 99);
+
+    rewardDrop = enemyRewardDrop + randomBonus;
 
     for (size_t i = 0; i < 10; i++)
     {
